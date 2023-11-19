@@ -1,0 +1,63 @@
+/*
+ * Dylan Gilson
+ * dylan.gilson@outlook.com
+ * November 19, 2023
+ */
+
+#pragma once
+
+#include <cmath>
+
+class Vector3f {
+    public:
+        float x;
+        float y;
+        float z;
+
+        Vector3f(float x, float y, float z);
+        void normalize();
+        float dot_product(Vector3f vector);
+        Vector3f cross_product(Vector3f vector);
+};
+
+class Matrix4f {
+    public:
+	    float m[16];
+
+        Matrix4f operator*=(Matrix4f matrix);
+        Matrix4f operator*(Matrix4f matrix);
+        void rotateX(float angle);
+        void rotateY(float angle);
+        void rotateZ(float angle);
+        void scale(Vector3f vector);
+        void translate(Vector3f vector);
+};
+
+class Vector4f {
+    public:
+        float x;
+        float y;
+        float z;
+        float w;
+
+        Vector4f(float x, float y, float z, float w);
+        Vector4f operator*=(Matrix4f matrix);
+        Vector4f operator*(Matrix4f matrix);
+        void normalize();
+        float dot_product(Vector4f vector);
+        Vector4f cross_product(Vector4f vector);
+};
+
+static const Vector4f X_AXIS = {1.0f, 0.0f, 0.0f, 0.0f};
+static const Vector4f Y_AXIS = {0.0f, 1.0f, 0.0f, 0.0f};
+static const Vector4f Z_AXIS = {0.0f, 0.0f, 1.0f, 0.0f};
+static const Vector4f INV_X_AXIS = {-1.0f, 0.0f, 0.0f, 0.0f};
+static const Vector4f INV_Y_AXIS = {0.0f, -1.0f, 0.0f, 0.0f};
+static const Vector4f INV_Z_AXIS = {0.0f, 0.0f, -1.0f, 0.0f};
+
+static const Matrix4f IDENTITY_MATRIX = {
+	1.0f, 0.0f, 0.0f, 0.0f,
+	0.0f, 1.0f, 0.0f, 0.0f,
+	0.0f, 0.0f, 1.0f, 0.0f,
+	0.0f, 0.0f, 0.0f, 1.0f
+};
