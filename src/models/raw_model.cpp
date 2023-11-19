@@ -4,7 +4,7 @@
  * Novmeber 3, 2023
  */
 
-#include "raw_model.hpp"
+#include "./models/raw_model.hpp"
 
 RawModel::RawModel(VAO *vao, std::vector<int> indices) {
     this->vao = vao;

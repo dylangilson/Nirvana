@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "raw_model.hpp"
+#include "./models/raw_model.hpp"
 
 class Renderer {
     public:

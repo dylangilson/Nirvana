@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <vector>
 
-#include "vao.hpp"
+#include "./gl_objects/vao.hpp"
 
 class RawModel {
     public:

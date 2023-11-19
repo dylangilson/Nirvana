@@ -4,7 +4,8 @@
  * Novmeber 3, 2023
  */
 
-#include "vbo.hpp"
+// #include "vbo.hpp"
+#include "./gl_objects/vbo.hpp"
 
 VBO::VBO(unsigned int type) {
     this->type = type;

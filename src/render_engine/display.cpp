@@ -4,8 +4,11 @@
  * October 29, 2023
  */
 
-#include "display.hpp"
+#include "./render_engine/display.hpp"
 
+const GLFWvidmode *Display::mode = NULL;
+GLFWwindow *Display::window = NULL;
+GLFWmonitor **Display::monitors = NULL;
 int Display::frame_count = 0;
 long Display::last_frame_time = 0;
 float Display::delta_time = 0.0f;
@@ -15,9 +18,6 @@ int Display::monitor_y = 0;
 int Display::monitor_width = 0;
 int Display::monitor_height = 0;
 bool Display::is_fullscreen = false;
-const GLFWvidmode *Display::mode = NULL;
-GLFWwindow *Display::window = NULL;
-GLFWmonitor **Display::monitors = NULL;
 
 Display::Display() {
     // initialize GLFW
@@ -71,7 +71,7 @@ void Display::update_display() {
     Display::delta_time = (current_frame_time - Display::last_frame_time) / 1000.0f; // delta_time stores time in seconds
 
     if (current_frame_time - Display::last_frame_time >= 1.0) {
-        std::cout << "FPS " << Display::frame_count << std::endl;
+        std::cout << "FPS: " << Display::frame_count << std::endl;
 
         Display::frame_count = 0;
         Display::last_frame_time = current_frame_time;

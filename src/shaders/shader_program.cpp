@@ -4,7 +4,7 @@
  * November 8, 2023
  */
 
-#include "shader_program.hpp"
+#include "./shaders/shader_program.hpp"
 
 ShaderProgram::ShaderProgram(std::string vertex_shader_file, std::string fragment_shader_file) {
     program_id = glCreateProgram();

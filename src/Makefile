@@ -1,29 +1,25 @@
 NAME = nirvana
 
-OBJDIR = ../objs
-HEADERDIR = ../headers
+OBJ_DIR = ../objs
+HEADER_DIR = ../headers
 
 CC = g++
-CFLAGS = -g -Wall -Wextra -std=c++11 -pedantic -lglfw -ldl -I $(HEADERDIR)
+CFLAGS = -g -Wall -Wextra -std=c++11 -pedantic -lglfw -ldl -I $(HEADER_DIR)
 
-DEPS = glad.h display.hpp vao.hpp vbo.hpp raw_model.hpp loader.hpp renderer.hpp shader_program.hpp static_shader.hpp 
-OBJS = glad.o main.o display.o vao.o vbo.o raw_model.o loader.o renderer.o shader_program.o static_shader.o
+OBJ_FILES = glad.o main.o display.o vao.o vbo.o raw_model.o loader.o renderer.o shader_program.o static_shader.o
+OBJS = $(patsubst %, $(OBJ_DIR)/%, $(OBJ_FILES))
+INCLUDES = $(patsubst %, $(HEADER_DIR), /*/%.hpp)
+SRC_FILE_PATH = */%.cpp
+OBJ_FILE_PATH = %.o
 
-DEP = $(patsubst %, $(HEADERDIR)/%, $(DEPS))
-OBJ = $(patsubst %, $(OBJDIR)/%, $(OBJS))
-
-$(OBJDIR)/%.o: %.c $(DEP)
-	@mkdir -p $(OBJDIR)
+$(OBJ_DIR)/$(OBJ_FILE_PATH): $(SRC_FILE_PATH) $(INCLUDES)
+	@mkdir -p $(OBJ_DIR)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(OBJDIR)/%.o: %.cpp $(DEP)
-	@mkdir -p $(OBJDIR)
-	$(CC) -c -o $@ $< $(CFLAGS)
-
-$(NAME): $(OBJ)
+$(NAME): $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS)
 
 .PHONY : clean
 
 clean:
-	rm -f $(OBJDIR)/*.o $(NAME)
+	rm -f $(OBJ_DIR)/*.o $(NAME)

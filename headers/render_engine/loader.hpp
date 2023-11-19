@@ -8,9 +8,9 @@
 
 #include <stdlib.h>
 
-#include "raw_model.hpp"
-#include "vao.hpp"
-#include "vbo.hpp"
+#include "./models/raw_model.hpp"
+#include "./gl_objects/vao.hpp"
+#include "./gl_objects/vbo.hpp"
 
 class Loader {
     public:

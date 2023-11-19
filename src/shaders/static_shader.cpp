@@ -4,7 +4,7 @@
  * November 8, 2023
  */
 
-#include "static_shader.hpp"
+#include "./shaders/static_shader.hpp"
 
 std::string StaticShader::VERTEX_SHADER_FILE = "../res/shaders/vertex_shader.glsl";
 std::string StaticShader::FRAGMENT_SHADER_FILE = "../res/shaders/fragment_shader.glsl";

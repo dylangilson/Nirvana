@@ -9,7 +9,7 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include "glad.h"
+#include "./engine/glad.hpp"
 #include <GLFW/glfw3.h>
 
 class Display {
@@ -18,10 +18,11 @@ class Display {
         static const int HEIGHT = 720;
         static const int MAX_FPS = 120;
         static GLFWwindow *window;
+        static GLFWmonitor **monitors;
+        static const GLFWvidmode *mode;
         static int frame_count;
         static long last_frame_time; // time of last frame in milliseconds
         static float delta_time;
-        static GLFWmonitor **monitors;
         static int count_monitors;
         static int monitor_x;
         static int monitor_y;
@@ -32,6 +33,5 @@ class Display {
         Display();
         static void update_display();
         static float get_frame_time_in_seconds();
-        static const GLFWvidmode *mode;
         static void switch_screen_mode();
 };

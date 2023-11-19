@@ -16,7 +16,6 @@ class VAO {
         VAO();
         ~VAO();
         unsigned int get_vao_id();
-        int get_index_count();
         VBO *get_index_vbo();
         void bind(std::vector<int> attributes);
         void unbind(std::vector<int> attributes);
@@ -28,7 +27,6 @@ class VAO {
         std::vector<VBO *> vbos;
         unsigned int id;
         VBO *index_vbo;
-        size_t index_count;
 
         void bind();
         void unbind();

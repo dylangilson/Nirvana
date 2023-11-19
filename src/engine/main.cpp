@@ -11,14 +11,14 @@
 #include <iostream>
 #include <vector>
 
-#include "glad.h"
+#include "./engine/glad.hpp"
 #include <GLFW/glfw3.h>
 
-#include "display.hpp"
-#include "loader.hpp"
-#include "raw_model.hpp"
-#include "renderer.hpp"
-#include "static_shader.hpp"
+#include "./render_engine/display.hpp"
+#include "./render_engine/loader.hpp"
+#include "./models/raw_model.hpp"
+#include "./render_engine/renderer.hpp"
+#include "./shaders/static_shader.hpp"
 
 int main(int argc, char *argv[]) {
     // hide warnings from main arguments

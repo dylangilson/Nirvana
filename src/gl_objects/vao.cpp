@@ -4,10 +4,11 @@
  * Novmeber 3, 2023
  */
 
-#include "vao.hpp"
+#include "./gl_objects/vao.hpp"
 
 VAO::VAO() {
     glGenVertexArrays(1, &id);
+    bind(std::vector<int>());
 }
 
 VAO::~VAO() {
@@ -24,10 +25,6 @@ VAO::~VAO() {
 
 unsigned int VAO::get_vao_id() {
     return id;
-}
-
-int VAO::get_index_count() {
-    return index_count;
 }
 
 VBO *VAO::get_index_vbo() {
@@ -59,7 +56,6 @@ void VAO::create_index_buffer(std::vector<int> indices) {
     index_vbo->bind();
 
     index_vbo->store_data(indices);
-    index_count = indices.size();
 
     index_vbo->unbind();
 }

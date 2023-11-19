@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <vector>
 
-#include "glad.h"
+#include "./engine/glad.hpp"
 
 class VBO {
     public:

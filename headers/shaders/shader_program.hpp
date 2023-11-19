@@ -10,7 +10,7 @@
 #include <iostream>
 #include <string>
 
-#include "glad.h"
+#include "./engine/glad.hpp"
 #include <GLFW/glfw3.h>
 
 class ShaderProgram {

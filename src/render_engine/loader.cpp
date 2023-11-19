@@ -4,7 +4,7 @@
  * Novmeber 3, 2023
  */
 
-#include "loader.hpp"
+#include "./render_engine/loader.hpp"
 
 RawModel *Loader::load_to_vao(std::vector<float> positions, std::vector<int> indices) {
     VAO *vao = new VAO();

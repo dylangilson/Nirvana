@@ -4,7 +4,7 @@
  * Novmeber 3, 2023
  */
 
-#include "renderer.hpp"
+#include "./render_engine/renderer.hpp"
 
 void Renderer::prepare() {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
