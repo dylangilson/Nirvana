@@ -14,7 +14,7 @@ StaticShader::StaticShader() : ShaderProgram(VERTEX_SHADER_FILE, FRAGMENT_SHADER
 }
 
 StaticShader::~StaticShader() {
-
+    
 }
 
 void ShaderProgram::bind_attributes() {

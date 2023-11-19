@@ -20,6 +20,13 @@ GLFWwindow *Display::window = NULL;
 GLFWmonitor **Display::monitors = NULL;
 
 Display::Display() {
+    // initialize GLFW
+    if (!glfwInit()) {
+        std::cout << "Failed to initialize GLFW" << std::endl;
+        glfwTerminate();
+        exit(EXIT_FAILURE);
+    }
+
     glfwWindowHint(GLFW_SAMPLES, 4); // 4x anti-aliasing
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // OpenGL version 3.2
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
@@ -34,11 +41,10 @@ Display::Display() {
         exit(EXIT_FAILURE);
     }
 
-    glfwMakeContextCurrent(Display::window); // initialize GLEW
-    glewExperimental = true; // needed in core profile
+    glfwMakeContextCurrent(Display::window);
 
-    if (glewInit() != GLEW_OK) {
-        std::cerr << "Failed to initialize GLEW" << std::endl;
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        std::cout << "Failed to initialize GLAD" << std::endl;
         glfwTerminate();
         exit(EXIT_FAILURE);
     }

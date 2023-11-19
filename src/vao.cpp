@@ -58,7 +58,7 @@ void VAO::create_index_buffer(std::vector<int> indices) {
     index_vbo = new VBO(GL_ELEMENT_ARRAY_BUFFER);
     index_vbo->bind();
 
-    index_vbo->store_data(indices, indices.size());
+    index_vbo->store_data(indices);
     index_count = indices.size();
 
     index_vbo->unbind();
@@ -69,7 +69,7 @@ void VAO::create_attribute(unsigned int attribute_id, std::vector<float> data, s
     vbo->bind();
     vbos.push_back(vbo);  
 
-    vbo->store_data(data, data.size() * sizeof(float));
+    vbo->store_data(data);
     glVertexAttribPointer(attribute_id, attribute_size, GL_FLOAT, false, attribute_size * sizeof(float), (void *)0);
 
     vbo->unbind();
@@ -80,7 +80,7 @@ void VAO::create_attribute(unsigned int attribute_id, std::vector<int> data, siz
     vbo->bind();
     vbos.push_back(vbo);
 
-    vbo->store_data(data, data.size() * sizeof(int));
+    vbo->store_data(data);
     glVertexAttribIPointer(attribute_id, attribute_size, GL_INT, attribute_size * sizeof(int), (void *)0);
 
     vbo->unbind();

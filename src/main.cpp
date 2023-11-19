@@ -11,7 +11,7 @@
 #include <iostream>
 #include <vector>
 
-#include <GL/glew.h>
+#include "glad.h"
 #include <GLFW/glfw3.h>
 
 #include "display.hpp"
@@ -25,17 +25,10 @@ int main(int argc, char *argv[]) {
     (void)argc;
     (void)argv;
 
-    // initialize GLFW
-    if (!glfwInit()) {
-        fprintf(stderr, "Failed to initialize GLFW\n");
-        glfwTerminate();
-        return EXIT_FAILURE;
-    }
-
     Display display;
     Loader loader;
     Renderer renderer;
-    StaticShader shader;
+    StaticShader *shader = new StaticShader();
 
     std::vector<float> vertices = {
         -0.5f, 0.5f, 0.0f,
@@ -55,16 +48,17 @@ int main(int argc, char *argv[]) {
     while (!glfwWindowShouldClose(Display::window)) {
         // render
         renderer.prepare();
-        shader.start();
+        shader->start();
         renderer.render(model);
-        shader.stop();
+        shader->stop();
         Display::update_display();
     }
 
     // clean up
+    delete shader;
     delete model;
-
+    
     glfwTerminate();
 
-    return 0;
+    return EXIT_SUCCESS;
 }

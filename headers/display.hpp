@@ -9,7 +9,7 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include <GL/glew.h>
+#include "glad.h"
 #include <GLFW/glfw3.h>
 
 class Display {
