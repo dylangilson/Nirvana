@@ -31,10 +31,10 @@ void VBO::unbind() {
     glBindBuffer(type, 0);
 }
 
-void VBO::store_data(float *data, size_t data_length) {
-    glBufferData(type, data_length, data, GL_STATIC_DRAW);
+void VBO::store_data(std::vector<float> data, size_t data_length) {
+    glBufferData(type, data_length, data.data(), GL_STATIC_DRAW);
 }
 
-void VBO::store_data(int *data, size_t data_length) {
-    glBufferData(type, data_length, data, GL_STATIC_DRAW);
+void VBO::store_data(std::vector<int> data, size_t data_length) {
+    glBufferData(type, data_length, data.data(), GL_STATIC_DRAW);
 }

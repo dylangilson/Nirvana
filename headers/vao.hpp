@@ -18,11 +18,11 @@ class VAO {
         unsigned int get_vao_id();
         int get_index_count();
         VBO *get_index_vbo();
-        void bind(int *attributes);
-        void unbind(int *attributes);
-        void create_index_buffer(int *indices, size_t indices_length);
-        void create_attribute(unsigned int attribute_id, float *data, size_t data_length, size_t attribute_size);
-        void create_attribute(unsigned int attribute_id, int *data, size_t data_length, size_t attribute_size);
+        void bind(std::vector<int> attributes);
+        void unbind(std::vector<int> attributes);
+        void create_index_buffer(std::vector<int> indices);
+        void create_attribute(unsigned int attribute_id, std::vector<float> data, size_t attribute_size);
+        void create_attribute(unsigned int attribute_id, std::vector<int> data, size_t attribute_size);
 
     private:
         std::vector<VBO *> vbos;

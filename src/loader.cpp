@@ -6,15 +6,14 @@
 
 #include "loader.hpp"
 
-RawModel *Loader::load_to_vao(float *positions, int *indices, size_t positions_length, size_t indices_length) {
+RawModel *Loader::load_to_vao(std::vector<float> positions, std::vector<int> indices) {
     VAO *vao = new VAO();
-    vao->bind(NULL);
-    vaos.push_back(vao);
+    vao->bind(std::vector<int>());
 
-    vao->create_attribute(0, positions, positions_length, 3);
-    vao->create_index_buffer(indices, indices_length);
+    vao->create_attribute(0, positions, 3);
+    vao->create_index_buffer(indices);
 
-    vao->unbind(NULL);
+    vao->unbind(std::vector<int>());
 
-    return new RawModel(vao, indices, indices_length);
+    return new RawModel(vao, indices);
 }

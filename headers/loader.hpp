@@ -14,9 +14,5 @@
 
 class Loader {
     public:
-        RawModel *load_to_vao(float *positions, int *indices, size_t data_length, size_t indices_length);
-
-    private:
-        std::vector<VAO *> vaos;
-        std::vector<VBO *> vbos;
+        RawModel *load_to_vao(std::vector<float> positions, std::vector<int> indices);
 };

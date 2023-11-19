@@ -7,19 +7,18 @@
 #pragma once
 
 #include <stdlib.h>
+#include <vector>
 
 #include "vao.hpp"
 
 class RawModel {
     public:
-        RawModel(VAO *vao, int *indices, size_t vertex_count);
+        RawModel(VAO *vao, std::vector<int> indices);
         ~RawModel();
         VAO *get_vao();
-        int *get_indices();
-        size_t get_vertex_count();    
+        std::vector<int> get_indices();   
 
     private:
         VAO *vao;
-        int *indices;
-        size_t vertex_count;
+        std::vector<int> indices;
 };

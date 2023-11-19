@@ -6,8 +6,6 @@
 
 #include "vao.hpp"
 
-#include <algorithm>
-
 VAO::VAO() {
     glGenVertexArrays(1, &id);
 }
@@ -20,6 +18,8 @@ VAO::~VAO() {
     for (size_t i = 0; i < vbos_count; i++) {
         delete vbos.at(i);
     }
+
+    delete index_vbo;
 }
 
 unsigned int VAO::get_vao_id() {
@@ -34,54 +34,53 @@ VBO *VAO::get_index_vbo() {
     return index_vbo;
 }
 
-void VAO::bind(int *attributes) {
+void VAO::bind(std::vector<int> attributes) {
     bind();
 
-    if (attributes != NULL) {
-        for (size_t i = 0; i < sizeof(attributes) / sizeof(int); i++) {
-            glEnableVertexAttribArray(attributes[i]);
+    if (attributes.size() != 0) {
+        for (size_t i = 0; i < attributes.size(); i++) {
+            glEnableVertexAttribArray(attributes.at(i));
         }
     }
 }
 
-void VAO::unbind(int *attributes) {
-    if (attributes != NULL) {
-        for (size_t i = 0; i < sizeof(attributes) / sizeof(int); i++) {
-            glDisableVertexAttribArray(attributes[i]);
+void VAO::unbind(std::vector<int> attributes) {
+    if (attributes.size() != 0) {
+        for (size_t i = 0; i < attributes.size(); i++) {
+            glDisableVertexAttribArray(attributes.at(i));
         }
     }
 
     unbind();
 }
 
-void VAO::create_index_buffer(int *indices, size_t indices_length) {
+void VAO::create_index_buffer(std::vector<int> indices) {
     index_vbo = new VBO(GL_ELEMENT_ARRAY_BUFFER);
     index_vbo->bind();
-    vbos.push_back(index_vbo);
 
-    index_vbo->store_data(indices, indices_length);
-    index_count = indices_length;
+    index_vbo->store_data(indices, indices.size());
+    index_count = indices.size();
 
     index_vbo->unbind();
 }
 
-void VAO::create_attribute(unsigned int attribute_id, float *data, size_t data_length, size_t attribute_size) {
+void VAO::create_attribute(unsigned int attribute_id, std::vector<float> data, size_t attribute_size) {
     VBO *vbo = new VBO(GL_ARRAY_BUFFER);
     vbo->bind();
     vbos.push_back(vbo);  
 
-    vbo->store_data(data, data_length * sizeof(float));
+    vbo->store_data(data, data.size() * sizeof(float));
     glVertexAttribPointer(attribute_id, attribute_size, GL_FLOAT, false, attribute_size * sizeof(float), (void *)0);
 
     vbo->unbind();
 }
 
-void VAO::create_attribute(unsigned int attribute_id, int *data, size_t data_length, size_t attribute_size) {
+void VAO::create_attribute(unsigned int attribute_id, std::vector<int> data, size_t attribute_size) {
     VBO *vbo = new VBO(GL_ARRAY_BUFFER);
     vbo->bind();
     vbos.push_back(vbo);
 
-    vbo->store_data(data, data_length * sizeof(int));
+    vbo->store_data(data, data.size() * sizeof(int));
     glVertexAttribIPointer(attribute_id, attribute_size, GL_INT, attribute_size * sizeof(int), (void *)0);
 
     vbo->unbind();

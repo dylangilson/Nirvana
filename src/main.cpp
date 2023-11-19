@@ -9,6 +9,7 @@
 // ./nirvana
 
 #include <iostream>
+#include <vector>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -36,19 +37,19 @@ int main(int argc, char *argv[]) {
     Renderer renderer;
     StaticShader shader;
 
-    float vertices[] = {
-	    -0.5f, 0.5f, 0.0f,
+    std::vector<float> vertices = {
+        -0.5f, 0.5f, 0.0f,
 		-0.5f, -0.5f, 0.0f,
 		0.5f, -0.5f, 0.0f,
-		0.5f, 0.5f, 0.0f	
-	};
+		0.5f, 0.5f, 0.0f
+    };
 
-    int indices[] = {
+    std::vector<int> indices = {
         0, 1, 3,
         3, 1, 2
     };
 
-    RawModel *model = loader.load_to_vao(vertices, indices, sizeof(vertices) / sizeof(vertices[0]), sizeof(indices) / sizeof(indices[0]));
+    RawModel *model = loader.load_to_vao(vertices, indices);
 
     // game loop
     while (!glfwWindowShouldClose(Display::window)) {
