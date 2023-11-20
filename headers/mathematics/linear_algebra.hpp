@@ -7,6 +7,7 @@
 #pragma once
 
 #include <cmath>
+#include <iostream>
 
 class Vector3f {
     public:
@@ -15,9 +16,10 @@ class Vector3f {
         float z;
 
         Vector3f(float x, float y, float z);
+        friend std::ostream &operator<<(std::ostream &ret, const Vector3f &vector);
         void normalize();
         float dot_product(Vector3f vector);
-        Vector3f cross_product(Vector3f vector);
+        void cross_product(Vector3f vector);
 };
 
 class Matrix4f {
@@ -26,6 +28,7 @@ class Matrix4f {
 
         Matrix4f operator*=(Matrix4f matrix);
         Matrix4f operator*(Matrix4f matrix);
+        friend std::ostream &operator<<(std::ostream &ret, const Matrix4f &matrix);
         void rotateX(float angle);
         void rotateY(float angle);
         void rotateZ(float angle);
@@ -43,9 +46,10 @@ class Vector4f {
         Vector4f(float x, float y, float z, float w);
         Vector4f operator*=(Matrix4f matrix);
         Vector4f operator*(Matrix4f matrix);
+        friend std::ostream &operator<<(std::ostream &ret, const Vector4f &vector);
         void normalize();
         float dot_product(Vector4f vector);
-        Vector4f cross_product(Vector4f vector);
+        void cross_product(Vector4f vector);
 };
 
 static const Vector4f X_AXIS = {1.0f, 0.0f, 0.0f, 0.0f};

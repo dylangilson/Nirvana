@@ -6,7 +6,7 @@
 
 #include "./mathematics/linear_algebra.hpp"
 
-static const double PI = 3.14159265358979323846;
+static const float PI = 3.14159265358979323846;
 
 /** Vector3f implementation ***/
 
@@ -14,6 +14,11 @@ Vector3f::Vector3f(float x, float y, float z) {
     this->x = x;
     this->y = y;
     this->z = z;
+}
+
+std::ostream &operator<<(std::ostream &ret, const Vector3f &vector) {
+    ret << "[" << vector.x << ", " << vector.y << ", " << vector.z << "]";
+    return ret;
 }
 
 void Vector3f::normalize() {
@@ -33,14 +38,16 @@ float Vector3f::dot_product(Vector3f vector) {
     return x * vector.x + y * vector.y + z * vector.z;
 }
 
-Vector3f Vector3f::cross_product(Vector3f vector) {
+void Vector3f::cross_product(Vector3f vector) {
     Vector3f ret(0, 0, 0);
 
 	ret.x = y * vector.z - z * vector.y;
 	ret.y = z * vector.x - x * vector.z;
 	ret.z = x * vector.y - y * vector.x;
 
-    return ret;
+    x = ret.x;
+    y = ret.y;
+    z = ret.z;
 }
 
 /** Matrix4f implementation ***/
@@ -82,34 +89,52 @@ Matrix4f Matrix4f::operator*(Matrix4f matrix) {
 	return ret;
 }
 
+std::ostream &operator<<(std::ostream &ret, const Matrix4f &matrix) {
+    ret << matrix.m[0] << " " << matrix.m[1] << " " << matrix.m[2] << " " << matrix.m[3] << std::endl;
+    ret << matrix.m[4] << " " << matrix.m[5] << " " << matrix.m[6] << " " << matrix.m[7] << std::endl;
+    ret << matrix.m[8] << " " << matrix.m[9] << " " << matrix.m[10] << " " << matrix.m[11] << std::endl;
+    ret << matrix.m[12] << " " << matrix.m[13] << " " << matrix.m[14] << " " << matrix.m[15];
+
+    return ret;
+}
+
 void Matrix4f::rotateX(float angle) {
+    Matrix4f rotation = IDENTITY_MATRIX;
     float sine = (float)sin(angle);
     float cosine = (float)cos(angle);
 
-    m[5] *= cosine;
-	m[6] *= -sine;
-	m[9] *= sine;
-	m[10] *= cosine;
+    rotation.m[5] = cosine;
+	rotation.m[6] = -sine;
+	rotation.m[9] = sine;
+	rotation.m[10] = cosine;
+
+    *this *= rotation;
 }
 
 void Matrix4f::rotateY(float angle) {
+    Matrix4f rotation = IDENTITY_MATRIX;
     float sine = (float)sin(angle);
 	float cosine = (float)cos(angle);
 	
-	m[0] *= cosine;
-	m[8] *= sine;
-	m[2] *= -sine;
-	m[10] *= cosine;
+	rotation.m[0] = cosine;
+	rotation.m[8] = sine;
+	rotation.m[2] = -sine;
+	rotation.m[10] = cosine;
+
+    *this *= rotation;
 }
 
 void Matrix4f::rotateZ(float angle) {
+    Matrix4f rotation = IDENTITY_MATRIX;
     float sine = (float)sin(angle);
 	float cosine = (float)cos(angle);
 	
-	m[0] *= cosine;
-	m[1] *= -sine;
-	m[4] *= sine;
-	m[5] *= cosine;
+	rotation.m[0] = cosine;
+	rotation.m[1] = -sine;
+	rotation.m[4] = sine;
+	rotation.m[5] = cosine;
+
+    *this *= rotation;
 }
 
 void Matrix4f::scale(Vector3f vector) {
@@ -128,9 +153,13 @@ void Matrix4f::scale(Vector3f vector) {
 }
 
 void Matrix4f::translate(Vector3f vector) {
-    m[12] *= vector.x;
-	m[13] *= vector.y;
-	m[14] *= vector.z;
+    Matrix4f translation = IDENTITY_MATRIX;
+
+    translation.m[12] = vector.x;
+	translation.m[13] = vector.y;
+	translation.m[14] = vector.z;
+
+    *this *= translation;
 }
 
 /** Vector4f implementation ***/
@@ -162,6 +191,11 @@ Vector4f Vector4f::operator*(Matrix4f matrix) {
     return ret;
 }
 
+std::ostream &operator<<(std::ostream &ret, const Vector4f &vector) {
+    ret << "[" << vector.x << ", " << vector.y << ", " << vector.z << ", " << vector.w << "]";
+    return ret;
+}
+
 void Vector4f::normalize() {
     float magnitude = sqrt(x * x + y * y + z * z);
 
@@ -179,12 +213,15 @@ float Vector4f::dot_product(Vector4f vector) {
     return x * vector.x + y * vector.y + z * vector.z + w * vector.w;
 }
 
-Vector4f Vector4f::cross_product(Vector4f vector) {
-    Vector4f ret(0, 0, 0, 0);
+void Vector4f::cross_product(Vector4f vector) {
+    Vector4f ret(0.0f, 0.0f, 0.0f, 0.0f);
 
 	ret.x = y * vector.z - z * vector.y;
 	ret.y = z * vector.x - x * vector.z;
 	ret.z = x * vector.y - y * vector.x;
 
-    return ret;
+    x = ret.x;
+    y = ret.y;
+    z = ret.z;
+    w = 0;
 }
