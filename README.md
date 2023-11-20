@@ -15,7 +15,8 @@ with OpenGL used as the graphics API
 
 ## Features
 * 3D Animation
-* 2D textures
+* 2D Textures
+* 3D Camera
 * Animated Models
 * Audio Engine
 * Font Renderer
@@ -48,7 +49,7 @@ make
 * IMPORTANT: You will need to add a resource folder for
 the engine to find the resources used in Main.
 You can also create your own main.cpp and add your own resources.
-Use the provided main.c to see how it is structured
+Use the provided main.cpp to see how it is structured
 
 ## Dependencies
 * GLFW

@@ -11,10 +11,8 @@ RawModel::RawModel(VAO *vao, std::vector<int> indices) {
     this->indices = indices;
 }
 
-// TODO: re-enable delete indices once theyre dynamically allocated from obj files
 RawModel::~RawModel() {
     delete vao;
-    // delete[] indices;
 }
 
 VAO *RawModel::get_vao() {

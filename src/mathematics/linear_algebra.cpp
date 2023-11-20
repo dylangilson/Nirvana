@@ -25,7 +25,7 @@ void Vector3f::normalize() {
     float magnitude = sqrt(x * x + y * y + z * z);
 
     // vector already normalized
-    if (magnitude == 0 || magnitude == 1) {
+    if (magnitude == 0.0f || magnitude == 1.0f) {
         return;
     }
 
@@ -39,7 +39,7 @@ float Vector3f::dot_product(Vector3f vector) {
 }
 
 void Vector3f::cross_product(Vector3f vector) {
-    Vector3f ret(0, 0, 0);
+    Vector3f ret(0.0f, 0.0f, 0.0f);
 
 	ret.x = y * vector.z - z * vector.y;
 	ret.y = z * vector.x - x * vector.z;
@@ -53,36 +53,41 @@ void Vector3f::cross_product(Vector3f vector) {
 /** Matrix4f implementation ***/
 
 Matrix4f Matrix4f::operator*=(Matrix4f matrix) {
-    unsigned int row;
-    unsigned int row_offset;
-    unsigned int column;
+    Matrix4f temp = IDENTITY_MATRIX;
+    size_t row;
+    size_t row_offset;
+    size_t column;
 
 	for (row = 0, row_offset = row * 4; row < 4; ++row, row_offset = row * 4) {
 		for (column = 0; column < 4; ++column) {
-			m[row_offset + column] =
-				(m[row_offset + 0] * matrix.m[column + 0]) +
-				(m[row_offset + 1] * matrix.m[column + 4]) +
-				(m[row_offset + 2] * matrix.m[column + 8]) +
-				(m[row_offset + 3] * matrix.m[column + 12]);
+			temp.m[row_offset + column] =
+				m[row_offset + 0] * matrix.m[column + 0] +
+				m[row_offset + 1] * matrix.m[column + 4] +
+				m[row_offset + 2] * matrix.m[column + 8] +
+				m[row_offset + 3] * matrix.m[column + 12];
         }
     }
 
-    return *this;
+    for (size_t i = 0; i < 16; i++) {
+        m[i] = temp.m[i];
+    }
+
+	return *this;
 }
 
 Matrix4f Matrix4f::operator*(Matrix4f matrix) {
     Matrix4f ret = IDENTITY_MATRIX;
-    unsigned int row;
-    unsigned int row_offset;
-    unsigned int column;
+    size_t row;
+    size_t row_offset;
+    size_t column;
 
 	for (row = 0, row_offset = row * 4; row < 4; ++row, row_offset = row * 4) {
 		for (column = 0; column < 4; ++column) {
 			ret.m[row_offset + column] =
-				(m[row_offset + 0] * matrix.m[column + 0]) +
-				(m[row_offset + 1] * matrix.m[column + 4]) +
-				(m[row_offset + 2] * matrix.m[column + 8]) +
-				(m[row_offset + 3] * matrix.m[column + 12]);
+				m[row_offset + 0] * matrix.m[column + 0] +
+				m[row_offset + 1] * matrix.m[column + 4] +
+				m[row_offset + 2] * matrix.m[column + 8] +
+				m[row_offset + 3] * matrix.m[column + 12];
         }
     }
 
@@ -172,21 +177,28 @@ Vector4f::Vector4f(float x, float y, float z, float w) {
 }
 
 Vector4f Vector4f::operator*=(Matrix4f matrix) {
-    x = matrix.m[0] * x + matrix.m[1] * y + matrix.m[2] * z + matrix.m[3] * w;
-    y = matrix.m[4] * x + matrix.m[5] * y + matrix.m[6] * z + matrix.m[7] * w;
-    z = matrix.m[8] * x + matrix.m[9] * y + matrix.m[10] * z + matrix.m[11] * w;
-    w = matrix.m[12] * x + matrix.m[13] * y + matrix.m[14] * z + matrix.m[15] * w;
+    Vector4f temp(0.0f, 0.0f, 0.0f, 0.0f);
+
+    temp.x = matrix.m[0] * x + matrix.m[4] * y + matrix.m[8] * z + matrix.m[12] * w;
+    temp.y = matrix.m[1] * x + matrix.m[5] * y + matrix.m[9] * z + matrix.m[13] * w;
+    temp.z = matrix.m[2] * x + matrix.m[6] * y + matrix.m[10] * z + matrix.m[14] * w;
+    temp.w = matrix.m[3] * x + matrix.m[7] * y + matrix.m[11] * z + matrix.m[15] * w;
+
+    x = temp.x;
+    y = temp.y;
+    z = temp.z;
+    w = temp.w;
 
     return *this;
 }
 
 Vector4f Vector4f::operator*(Matrix4f matrix) {
-    Vector4f ret(0, 0, 0, 0);
+    Vector4f ret(0.0f, 0.0f, 0.0f, 0.0f);
 
-    ret.x = matrix.m[0] * x + matrix.m[1] * y + matrix.m[2] * z + matrix.m[3] * w;
-    ret.y = matrix.m[4] * x + matrix.m[5] * y + matrix.m[6] * z + matrix.m[7] * w;
-    ret.z = matrix.m[8] * x + matrix.m[9] * y + matrix.m[10] * z + matrix.m[11] * w;
-    ret.w = matrix.m[12] * x + matrix.m[13] * y + matrix.m[14] * z + matrix.m[15] * w;
+    ret.x = matrix.m[0] * x + matrix.m[4] * y + matrix.m[8] * z + matrix.m[12] * w;
+    ret.y = matrix.m[1] * x + matrix.m[5] * y + matrix.m[9] * z + matrix.m[13] * w;
+    ret.z = matrix.m[2] * x + matrix.m[6] * y + matrix.m[10] * z + matrix.m[14] * w;
+    ret.w = matrix.m[3] * x + matrix.m[7] * y + matrix.m[11] * z + matrix.m[15] * w;
 
     return ret;
 }
@@ -197,16 +209,17 @@ std::ostream &operator<<(std::ostream &ret, const Vector4f &vector) {
 }
 
 void Vector4f::normalize() {
-    float magnitude = sqrt(x * x + y * y + z * z);
+    float magnitude = sqrt(x * x + y * y + z * z + w * w);
 
     // vector already normalized
-    if (magnitude == 0 || magnitude == 1) {
+    if (magnitude == 0.0f || magnitude == 1.0f) {
         return;
     }
 
 	x = x / magnitude;
 	y = y / magnitude;
 	z = z / magnitude;
+    w = w / magnitude;
 }
 
 float Vector4f::dot_product(Vector4f vector) {
