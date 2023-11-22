@@ -6,7 +6,7 @@
 
 #include "./mathematics/linear_algebra.hpp"
 
-static const float PI = 3.14159265358979323846;
+static const float PI = 3.1415926;
 
 /** Vector3f implementation ***/
 

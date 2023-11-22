@@ -6,7 +6,7 @@ HEADER_DIR = ../headers
 CC = g++
 CFLAGS = -g -Wall -Wextra -std=c++11 -pedantic -lglfw -ldl -I $(HEADER_DIR)
 
-OBJ_FILES = glad.o main.o linear_algebra.o display.o vao.o vbo.o raw_model.o loader.o renderer.o shader_program.o static_shader.o
+OBJ_FILES = glad.o main.o linear_algebra.o display.o vao.o vbo.o ebo.o raw_model.o loader.o renderer.o shader_program.o static_shader.o
 OBJS = $(patsubst %, $(OBJ_DIR)/%, $(OBJ_FILES))
 INCLUDES = $(patsubst %, $(HEADER_DIR), /*/%.hpp)
 SRC_FILE_PATH = */%.cpp

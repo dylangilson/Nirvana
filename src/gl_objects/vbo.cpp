@@ -6,35 +6,36 @@
 
 #include "./gl_objects/vbo.hpp"
 
-VBO::VBO(unsigned int type) {
-    this->type = type;
+VBO::VBO() {
     glGenBuffers(1, &id);
 }
 
 VBO::~VBO() {
-    glDeleteBuffers(1, &id);
+    destroy();
 }
 
-unsigned int VBO::get_vbo_id() {
+unsigned int VBO::get_id() {
     return id;
 }
 
-unsigned int VBO::get_type() {
-    return type;
-}
-
 void VBO::bind() {
-    glBindBuffer(type, id);
+    glBindBuffer(GL_ARRAY_BUFFER, id);
 }
 
 void VBO::unbind() {
-    glBindBuffer(type, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void VBO::store_data(std::vector<float> data) {
-    glBufferData(type, data.size() * sizeof(float), data.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(float), data.data(), GL_STATIC_DRAW);
 }
 
 void VBO::store_data(std::vector<int> data) {
-    glBufferData(type, data.size() * sizeof(int), data.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(int), data.data(), GL_STATIC_DRAW);
+}
+
+void VBO::destroy() {
+    glDeleteBuffers(1, &id);
+
+    id = 0;
 }

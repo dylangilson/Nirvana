@@ -12,23 +12,15 @@ VAO::VAO() {
 }
 
 VAO::~VAO() {
-    glDeleteVertexArrays(1, &id);
-
-    size_t vbos_count = vbos.size();
-
-    for (size_t i = 0; i < vbos_count; i++) {
-        delete vbos.at(i);
-    }
-
-    delete index_vbo;
+    destroy();
 }
 
-unsigned int VAO::get_vao_id() {
+unsigned int VAO::get_id() {
     return id;
 }
 
-VBO *VAO::get_index_vbo() {
-    return index_vbo;
+EBO *VAO::get_ebo() {
+    return ebo;
 }
 
 void VAO::bind(std::vector<int> attributes) {
@@ -52,16 +44,16 @@ void VAO::unbind(std::vector<int> attributes) {
 }
 
 void VAO::create_index_buffer(std::vector<int> indices) {
-    index_vbo = new VBO(GL_ELEMENT_ARRAY_BUFFER);
-    index_vbo->bind();
+    ebo = new EBO();
+    ebo->bind();
 
-    index_vbo->store_data(indices);
+    ebo->store_data(indices);
 
-    index_vbo->unbind();
+    ebo->unbind();
 }
 
 void VAO::create_attribute(unsigned int attribute_id, std::vector<float> data, size_t attribute_size) {
-    VBO *vbo = new VBO(GL_ARRAY_BUFFER);
+    VBO *vbo = new VBO();
     vbo->bind();
     vbos.push_back(vbo);  
 
@@ -72,7 +64,7 @@ void VAO::create_attribute(unsigned int attribute_id, std::vector<float> data, s
 }
 
 void VAO::create_attribute(unsigned int attribute_id, std::vector<int> data, size_t attribute_size) {
-    VBO *vbo = new VBO(GL_ARRAY_BUFFER);
+    VBO *vbo = new VBO();
     vbo->bind();
     vbos.push_back(vbo);
 
@@ -88,4 +80,18 @@ void VAO::bind() {
 
 void VAO::unbind() {
     glBindVertexArray(0);
+}
+
+void VAO::destroy() {
+    glDeleteVertexArrays(1, &id);
+
+    size_t vbos_count = vbos.size();
+
+    for (size_t i = 0; i < vbos_count; i++) {
+        delete vbos.at(i);
+    }
+
+    delete ebo;
+
+    id = 0;
 }

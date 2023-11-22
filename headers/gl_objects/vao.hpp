@@ -6,17 +6,39 @@
 
 #pragma once
 
-#include <stdlib.h>
+#include <utility>
 #include <vector>
 
+#include "ebo.hpp"
 #include "vbo.hpp"
 
 class VAO {
     public:
         VAO();
         ~VAO();
-        unsigned int get_vao_id();
-        VBO *get_index_vbo();
+
+        VAO(const VAO&) = delete; // delete copy constructor
+        VAO(VAO &&other) : vbos(other.vbos), id(other.id), ebo(other.ebo) {
+            other.vbos = std::vector<VBO *>();
+            other.id = 0;
+            other.ebo = NULL;
+        }
+
+        VAO &operator=(const VAO&) = delete; // delete copy-assignment
+        VAO &operator=(VAO &&other) {
+            if (this != &other) {
+                destroy();
+
+                vbos.swap(other.vbos);
+                std::swap(id, other.id);
+                std::swap(ebo, other.ebo);
+            }
+
+            return *this;
+        }
+
+        unsigned int get_id();
+        EBO *get_ebo();
         void bind(std::vector<int> attributes);
         void unbind(std::vector<int> attributes);
         void create_index_buffer(std::vector<int> indices);
@@ -25,9 +47,10 @@ class VAO {
 
     private:
         std::vector<VBO *> vbos;
-        unsigned int id;
-        VBO *index_vbo;
+        unsigned int id = 0;
+        EBO *ebo;
 
         void bind();
         void unbind();
+        void destroy();
 };

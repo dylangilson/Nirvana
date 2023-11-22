@@ -6,8 +6,8 @@
 
 #include "./shaders/static_shader.hpp"
 
-std::string StaticShader::VERTEX_SHADER_FILE = "../res/shaders/vertex_shader.glsl";
-std::string StaticShader::FRAGMENT_SHADER_FILE = "../res/shaders/fragment_shader.glsl";
+std::string StaticShader::VERTEX_SHADER_FILE = "./shaders/vertex_shader.glsl";
+std::string StaticShader::FRAGMENT_SHADER_FILE = "./shaders/fragment_shader.glsl";
 
 StaticShader::StaticShader() : ShaderProgram(VERTEX_SHADER_FILE, FRAGMENT_SHADER_FILE) {
     
