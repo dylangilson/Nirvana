@@ -8,7 +8,7 @@
 
 VAO::VAO() {
     glGenVertexArrays(1, &id);
-    bind(std::vector<int>());
+    bind();
 }
 
 VAO::~VAO() {
@@ -43,7 +43,7 @@ void VAO::unbind(std::vector<int> attributes) {
     unbind();
 }
 
-void VAO::create_index_buffer(std::vector<int> indices) {
+void VAO::create_ebo(std::vector<int> indices) {
     ebo = new EBO();
     ebo->bind();
 

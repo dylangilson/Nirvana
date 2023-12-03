@@ -13,11 +13,11 @@ ShaderProgram::ShaderProgram(std::string vertex_shader_file, std::string fragmen
 
     glAttachShader(program_id, vertex_shader_id);
     glAttachShader(program_id, fragment_shader_id);
+    bind_attributes();
     glLinkProgram(program_id);
     glValidateProgram(program_id);
     glDeleteShader(vertex_shader_id);
     glDeleteShader(fragment_shader_id);
-    bind_attributes();
 }
 
 ShaderProgram::~ShaderProgram() {

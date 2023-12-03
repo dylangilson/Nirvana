@@ -25,6 +25,7 @@ with OpenGL used as the graphics API
 * Shadows
 * Terrain
 * Skybox
+* 3D Object Materials
 * 3D Water
 * 3D Mouse Picker
 * Minimap

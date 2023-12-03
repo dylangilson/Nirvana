@@ -19,6 +19,7 @@
 #include "./models/raw_model.hpp"
 #include "./render_engine/renderer.hpp"
 #include "./shaders/static_shader.hpp"
+#include "./mathematics/random_number_generator.hpp"
 
 int main(int argc, char *argv[]) {
     // hide warnings from main arguments
@@ -42,8 +43,10 @@ int main(int argc, char *argv[]) {
         3, 1, 2
     };
 
-    RawModel *model = loader.load_to_vao(vertices, indices);
+    RawModel *model = loader.load_raw_model(vertices, indices);
 
+    RandomNumberGenerator random_number_generator;
+    
     // game loop
     while (!glfwWindowShouldClose(Display::window)) {
         // render

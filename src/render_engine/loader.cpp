@@ -6,12 +6,12 @@
 
 #include "./render_engine/loader.hpp"
 
-RawModel *Loader::load_to_vao(std::vector<float> positions, std::vector<int> indices) {
+RawModel *Loader::load_raw_model(std::vector<float> positions, std::vector<int> indices) {
     VAO *vao = new VAO();
     vao->bind(std::vector<int>());
 
     vao->create_attribute(0, positions, 3);
-    vao->create_index_buffer(indices);
+    vao->create_ebo(indices);
 
     vao->unbind(std::vector<int>());
 
