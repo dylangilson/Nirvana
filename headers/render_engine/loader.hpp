@@ -6,13 +6,18 @@
 
 #pragma once
 
-#include <stdlib.h>
+#include "./engine/glad.hpp"
+
+#include <string>
+#include <vector>
 
 #include "./models/raw_model.hpp"
+#include "./textures/texture.hpp"
 #include "./gl_objects/vao.hpp"
 #include "./gl_objects/vbo.hpp"
 
 class Loader {
     public:
-        RawModel *load_raw_model(std::vector<float> positions, std::vector<int> indices);
+        RawModel *load_raw_model(std::vector<float> positions, std::vector<int> indices, std::vector<float> texture_coordinates);
+        Texture *load_texture(std::string file_name);
 };

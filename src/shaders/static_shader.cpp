@@ -19,4 +19,5 @@ StaticShader::~StaticShader() {
 
 void ShaderProgram::bind_attributes() {
     bind_attribute(0, "in_position"); // 0 -> position
+    bind_attribute(1, "in_texture_coordinates"); // 1 -> texture coordinates
 }

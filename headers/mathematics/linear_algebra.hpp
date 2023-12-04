@@ -9,12 +9,25 @@
 #include <cmath>
 #include <iostream>
 
+class Vector2f {
+    public:
+        float x;
+        float y;
+
+        Vector2f();
+        Vector2f(float x, float y);
+        friend std::ostream &operator<<(std::ostream &ret, const Vector2f &vector);
+        void normalize();
+        float dot_product(Vector2f vector);
+};
+
 class Vector3f {
     public:
         float x;
         float y;
         float z;
 
+        Vector3f();
         Vector3f(float x, float y, float z);
         friend std::ostream &operator<<(std::ostream &ret, const Vector3f &vector);
         void normalize();
@@ -43,6 +56,7 @@ class Vector4f {
         float z;
         float w;
 
+        Vector4f();
         Vector4f(float x, float y, float z, float w);
         Vector4f operator*=(Matrix4f matrix);
         Vector4f operator*(Matrix4f matrix);

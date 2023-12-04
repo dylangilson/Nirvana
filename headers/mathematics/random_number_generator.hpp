@@ -14,7 +14,7 @@ class RandomNumberGenerator {
     public:
         RandomNumberGenerator();
         float rand();
-        unsigned int rand_in_range(unsigned int max);
+        int rand_in_range(int min, int max);
         long get_seed();
         std::mt19937_64 get_mersenne_twister();
 

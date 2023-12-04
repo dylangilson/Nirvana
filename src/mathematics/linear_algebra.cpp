@@ -8,7 +8,43 @@
 
 static const float PI = 3.1415926;
 
+/** Vector2f implementation ***/
+
+Vector2f::Vector2f() {
+
+}
+
+Vector2f::Vector2f(float x, float y) {
+    this->x = x;
+    this->y = y;
+}
+
+std::ostream &operator<<(std::ostream &ret, const Vector2f &vector) {
+    ret << "[" << vector.x << ", " << vector.y << "]";
+    return ret;
+}
+
+void Vector2f::normalize() {
+    float magnitude = sqrt(x * x + y * y);
+
+    // vector already normalized
+    if (magnitude == 0.0f || magnitude == 1.0f) {
+        return;
+    }
+
+	x = x / magnitude;
+	y = y / magnitude;
+}
+
+float Vector2f::dot_product(Vector2f vector) {
+    return x * vector.x + y * vector.y;
+}
+
 /** Vector3f implementation ***/
+
+Vector3f::Vector3f() {
+
+}
 
 Vector3f::Vector3f(float x, float y, float z) {
     this->x = x;
@@ -168,6 +204,10 @@ void Matrix4f::translate(Vector3f vector) {
 }
 
 /** Vector4f implementation ***/
+
+Vector4f::Vector4f() {
+
+}
 
 Vector4f::Vector4f(float x, float y, float z, float w) {
     this->x = x;

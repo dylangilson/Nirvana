@@ -14,12 +14,14 @@
 #include "./engine/glad.hpp"
 #include <GLFW/glfw3.h>
 
+#include "./mathematics/random_number_generator.hpp"
 #include "./render_engine/display.hpp"
 #include "./render_engine/loader.hpp"
 #include "./models/raw_model.hpp"
 #include "./render_engine/renderer.hpp"
 #include "./shaders/static_shader.hpp"
-#include "./mathematics/random_number_generator.hpp"
+#include "./textures/model_texture.hpp"
+#include "./models/textured_model.hpp"
 
 int main(int argc, char *argv[]) {
     // hide warnings from main arguments
@@ -27,6 +29,7 @@ int main(int argc, char *argv[]) {
     (void)argv;
 
     Display display;
+    RandomNumberGenerator random_number_generator;
     Loader loader;
     Renderer renderer;
     StaticShader *shader = new StaticShader();
@@ -43,23 +46,28 @@ int main(int argc, char *argv[]) {
         3, 1, 2
     };
 
-    RawModel *model = loader.load_raw_model(vertices, indices);
+    std::vector<float> texture_coordinates = {
+        0.0f, 0.0f,
+        0.0f, 1.0f,
+        1.0f, 1.0f,
+        1.0f, 0.0f
+    };
 
-    RandomNumberGenerator random_number_generator;
+    TexturedModel *textured_model = new TexturedModel(loader.load_raw_model(vertices, indices, texture_coordinates), new ModelTexture(loader.load_texture("OSRS LOGO")));
     
     // game loop
     while (!glfwWindowShouldClose(Display::window)) {
         // render
         renderer.prepare();
         shader->start();
-        renderer.render(model);
+        renderer.render(textured_model);
         shader->stop();
         Display::update_display();
     }
 
     // clean up
+    delete textured_model;
     delete shader;
-    delete model;
     
     glfwTerminate();
 

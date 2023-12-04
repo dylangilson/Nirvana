@@ -19,9 +19,17 @@ float RandomNumberGenerator::rand() {
     return (float)mersenne_twister() / (float)mersenne_twister.max();
 }
 
-// return an unsigned int in range [0, max - 1]
-unsigned int RandomNumberGenerator::rand_in_range(unsigned int max) {
-    return (unsigned int)((float)mersenne_twister() / (float)(mersenne_twister.max() / max));
+// return an int in range [min, max]
+int RandomNumberGenerator::rand_in_range(int min, int max) {
+    if (min == max) {
+        return max;
+    }
+
+    if (min > max) {
+        std::swap(min, max);
+    }
+
+    return min + mersenne_twister() % (max - min + 1);
 }
 
 long RandomNumberGenerator::get_seed() {
