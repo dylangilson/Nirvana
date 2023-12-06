@@ -8,11 +8,11 @@
 
 #include "shader_program.hpp"
 
-class StaticShader : public ShaderProgram {
+class EntityShader : public ShaderProgram {
     public:
         static std::string VERTEX_SHADER_FILE;
         static std::string FRAGMENT_SHADER_FILE;
 
-        StaticShader();
-        ~StaticShader();
+        EntityShader();
+        ~EntityShader();
 };

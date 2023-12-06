@@ -29,7 +29,7 @@ void Texture::load_data(std::string file_path) {
     unsigned char *data = stbi_load(file_path.c_str(), &width, &height, &number_of_channels, 0);
 
     if (!data) {
-        std::cout << "Failed to load texture " << file_path << std::endl;
+        std::cout << "Failed to load texture: " << file_path << std::endl;
     }
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);

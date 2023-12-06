@@ -8,6 +8,7 @@ CXXFLAGS = -g -Wall -Werror -Wextra -std=c++11 -pedantic -lglfw -ldl -I $(HEADER
 
 INCLUDES = $(patsubst %, $(HEADER_DIR), /*/%.hpp)
 SRCS = $(wildcard */*.cpp)
+# SRCS = engine/main.cpp
 OBJS = $(patsubst */%.cpp, */*.o, $(SRCS))
 
 $(OBJ_DIR)/%.o: $(SRCS) $(INCLUDES)

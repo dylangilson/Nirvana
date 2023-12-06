@@ -19,7 +19,7 @@
 #include "./render_engine/loader.hpp"
 #include "./models/raw_model.hpp"
 #include "./render_engine/renderer.hpp"
-#include "./shaders/static_shader.hpp"
+#include "./shaders/entity_shader.hpp"
 #include "./textures/model_texture.hpp"
 #include "./models/textured_model.hpp"
 
@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
     RandomNumberGenerator random_number_generator;
     Loader loader;
     Renderer renderer;
-    StaticShader *shader = new StaticShader();
+    EntityShader *shader = new EntityShader();
 
     std::vector<float> vertices = {
         -0.5f, 0.5f, 0.0f,
