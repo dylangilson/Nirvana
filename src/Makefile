@@ -1,6 +1,5 @@
 NAME = nirvana
 
-OBJ_DIR = ../objs
 HEADER_DIR = ../headers
 
 CC = g++
@@ -8,10 +7,9 @@ CXXFLAGS = -g -Wall -Werror -Wextra -std=c++11 -pedantic -lglfw -ldl -I $(HEADER
 
 INCLUDES = $(patsubst %, $(HEADER_DIR), /*/%.hpp)
 SRCS = $(wildcard */*.cpp)
-OBJS = $(patsubst */%.cpp, */*.o, $(SRCS))
+OBJS = $(SRCS:.cpp=.o)
 
-$(OBJ_DIR)/%.o: $(SRCS) $(INCLUDES)
-	@mkdir -p $(OBJ_DIR)
+%.o: */%.cpp $(INCLUDES)
 	$(CC) -c $< -o $@ $(CXXFLAGS)
 
 $(NAME): $(OBJS)
@@ -20,4 +18,4 @@ $(NAME): $(OBJS)
 .PHONY : clean
 
 clean:
-	rm -f $(OBJ_DIR)/*.o $(NAME)
+	rm -f */*.o $(NAME)

@@ -6,8 +6,8 @@
 
 #include "./shaders/entity_shader.hpp"
 
-std::string EntityShader::VERTEX_SHADER_FILE = "./shaders/vertex_shader.glsl";
-std::string EntityShader::FRAGMENT_SHADER_FILE = "./shaders/fragment_shader.glsl";
+std::string EntityShader::VERTEX_SHADER_FILE = "./shaders/entity_vertex_shader.glsl";
+std::string EntityShader::FRAGMENT_SHADER_FILE = "./shaders/entity_fragment_shader.glsl";
 
 EntityShader::EntityShader() : ShaderProgram(VERTEX_SHADER_FILE, FRAGMENT_SHADER_FILE) {
     
