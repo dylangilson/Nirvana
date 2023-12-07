@@ -53,7 +53,10 @@ int main(int argc, char *argv[]) {
         1.0f, 0.0f
     };
 
-    TexturedModel *textured_model = new TexturedModel(loader.load_raw_model(vertices, indices, texture_coordinates), new ModelTexture(loader.load_texture("OSRS LOGO")));
+
+    RawModel *model = loader.load_raw_model(vertices, indices, texture_coordinates);
+    ModelTexture *texture = new ModelTexture(loader.load_texture("OSRS LOGO"));
+    TexturedModel *textured_model = new TexturedModel(model, texture);
     
     // game loop
     while (!glfwWindowShouldClose(Display::window)) {

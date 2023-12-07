@@ -1,11 +1,9 @@
 NAME = nirvana
 
-HEADER_DIR = ../headers
-
 CC = g++
-CXXFLAGS = -g -Wall -Werror -Wextra -std=c++11 -pedantic -lglfw -ldl -I $(HEADER_DIR)
+CXXFLAGS = -g -Wall -Werror -Wextra -std=c++11 -pedantic -lglfw -ldl -I ../headers
 
-INCLUDES = $(patsubst %, $(HEADER_DIR), /*/%.hpp)
+INCLUDES = $(patsubst %, ../headers/, */%.hpp)
 SRCS = $(wildcard */*.cpp)
 OBJS = $(SRCS:.cpp=.o)
 

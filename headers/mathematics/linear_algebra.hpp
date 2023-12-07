@@ -16,6 +16,8 @@ class Vector2f {
 
         Vector2f();
         Vector2f(float x, float y);
+        Vector2f operator+=(Vector2f vector);
+        Vector2f operator+(Vector2f vector);
         friend std::ostream &operator<<(std::ostream &ret, const Vector2f &vector);
         void normalize();
         float dot_product(Vector2f vector);
@@ -29,6 +31,8 @@ class Vector3f {
 
         Vector3f();
         Vector3f(float x, float y, float z);
+        Vector3f operator+=(Vector3f vector);
+        Vector3f operator+(Vector3f vector);
         friend std::ostream &operator<<(std::ostream &ret, const Vector3f &vector);
         void normalize();
         float dot_product(Vector3f vector);
@@ -58,6 +62,8 @@ class Vector4f {
 
         Vector4f();
         Vector4f(float x, float y, float z, float w);
+        Vector4f operator+=(Vector4f vector);
+        Vector4f operator+(Vector4f vector);
         Vector4f operator*=(Matrix4f matrix);
         Vector4f operator*(Matrix4f matrix);
         friend std::ostream &operator<<(std::ostream &ret, const Vector4f &vector);

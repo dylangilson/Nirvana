@@ -19,6 +19,27 @@ Vector2f::Vector2f(float x, float y) {
     this->y = y;
 }
 
+Vector2f Vector2f::operator+=(Vector2f vector) {
+    Vector2f temp(0.0f, 0.0f);
+
+    temp.x = vector.x + x;
+    temp.y = vector.y + y;
+
+    x = temp.x;
+    y = temp.y;
+
+    return *this;
+}
+
+Vector2f Vector2f::operator+(Vector2f vector) {
+    Vector2f ret(0.0f, 0.0f);
+
+    ret.x = vector.x + x;
+    ret.y = vector.y + y;
+
+    return ret;
+}
+
 std::ostream &operator<<(std::ostream &ret, const Vector2f &vector) {
     ret << "[" << vector.x << ", " << vector.y << "]";
     return ret;
@@ -50,6 +71,30 @@ Vector3f::Vector3f(float x, float y, float z) {
     this->x = x;
     this->y = y;
     this->z = z;
+}
+
+Vector3f Vector3f::operator+=(Vector3f vector) {
+    Vector3f temp(0.0f, 0.0f, 0.0f);
+
+    temp.x = vector.x + x;
+    temp.y = vector.y + y;
+    temp.z = vector.z + z;
+
+    x = temp.x;
+    y = temp.y;
+    z = temp.z;
+
+    return *this;
+}
+
+Vector3f Vector3f::operator+(Vector3f vector) {
+    Vector3f ret(0.0f, 0.0f, 0.0f);
+
+    ret.x = vector.x + x;
+    ret.y = vector.y + y;
+    ret.z = vector.z + z;
+
+    return ret;
 }
 
 std::ostream &operator<<(std::ostream &ret, const Vector3f &vector) {
@@ -214,6 +259,33 @@ Vector4f::Vector4f(float x, float y, float z, float w) {
     this->y = y;
     this->z = z;
     this->w = w;
+}
+
+Vector4f Vector4f::operator+=(Vector4f vector) {
+    Vector4f temp(0.0f, 0.0f, 0.0f, 0.0f);
+
+    temp.x = vector.x + x;
+    temp.y = vector.y + y;
+    temp.z = vector.z + z;
+    temp.w = vector.w + w;
+
+    x = temp.x;
+    y = temp.y;
+    z = temp.z;
+    w = temp.w;
+
+    return *this;
+}
+
+Vector4f Vector4f::operator+(Vector4f vector) {
+    Vector4f ret(0.0f, 0.0f, 0.0f, 0.0f);
+
+    ret.x = vector.x + x;
+    ret.y = vector.y + y;
+    ret.z = vector.z + z;
+    ret.w = vector.w + w;
+
+    return ret;
 }
 
 Vector4f Vector4f::operator*=(Matrix4f matrix) {
