@@ -6,6 +6,10 @@
 
 #include "./uniforms/uniform_float.hpp"
 
+UniformFloat::UniformFloat() {
+
+}
+
 UniformFloat::UniformFloat(std::string name) : Uniform(name) {
     used = false;
 }

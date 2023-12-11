@@ -10,6 +10,7 @@
 
 class UniformSampler : public Uniform {
     public:
+        UniformSampler();
         UniformSampler(std::string name);
         void load_texture_unit(int value);
 

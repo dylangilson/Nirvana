@@ -13,9 +13,12 @@ ShaderProgram::ShaderProgram(std::string vertex_shader_file, std::string fragmen
 
     glAttachShader(program_id, vertex_shader_id);
     glAttachShader(program_id, fragment_shader_id);
+
     bind_attributes();
+
     glLinkProgram(program_id);
     glValidateProgram(program_id);
+
     glDeleteShader(vertex_shader_id);
     glDeleteShader(fragment_shader_id);
 }
@@ -25,7 +28,12 @@ ShaderProgram::~ShaderProgram() {
 
     glDetachShader(program_id, vertex_shader_id);
     glDetachShader(program_id, fragment_shader_id);
+    
     glDeleteProgram(program_id);
+}
+
+void ShaderProgram::bind_attributes() {
+
 }
 
 void ShaderProgram::start() {
@@ -38,6 +46,14 @@ void ShaderProgram::stop() {
 
 void ShaderProgram::bind_attribute(int attribute_id, std::string variable_name) {
     glBindAttribLocation(program_id, attribute_id, variable_name.c_str());
+}
+
+void ShaderProgram::store_all_uniform_locations(std::vector<Uniform *> uniforms) {
+    for (size_t i = 0; i < uniforms.size(); i++) {
+        uniforms.at(i)->store_uniform_location(program_id);
+    }
+
+    glValidateProgram(program_id);
 }
 
 int ShaderProgram::load_shader(std::string file_name, unsigned int type) {

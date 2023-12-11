@@ -6,6 +6,10 @@
 
 #include "./uniforms/uniform_matrix4f_vector.hpp"
 
+UniformMatrix4fVector::UniformMatrix4fVector() {
+    
+}
+
 UniformMatrix4fVector::UniformMatrix4fVector(std::string name, size_t count) : Uniform(name) {
     this->count = count;
 
@@ -17,5 +21,11 @@ UniformMatrix4fVector::UniformMatrix4fVector(std::string name, size_t count) : U
 void UniformMatrix4fVector::load_matrix4f_vector(std::vector<Matrix4f> matrices) {
     for (size_t i = 0; i < count; i++) {
         value.at(i).load_matrix(matrices.at(i));
+    }
+}
+
+void UniformMatrix4fVector::store_uniform_location(unsigned int program_id) {
+    for (size_t i = 0; i < count; i++) {
+        value.at(i).store_uniform_location(program_id);
     }
 }

@@ -11,6 +11,7 @@
 
 class UniformVector2f : public Uniform {
     public:
+        UniformVector2f();
         UniformVector2f(std::string name);
         void load_vector(Vector2f value);
 

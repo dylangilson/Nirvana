@@ -9,20 +9,24 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "./engine/glad.hpp"
 #include <GLFW/glfw3.h>
+
+#include "./uniforms/uniform.hpp"
 
 class ShaderProgram {
     public:
         ShaderProgram(std::string vertex_shader_file, std::string fragment_shader_file);
         virtual ~ShaderProgram();
+        virtual void bind_attributes();
         void start();
         void stop();
-        virtual void bind_attributes();
 
     protected:
         void bind_attribute(int attribute_id, std::string variable_name);
+        void store_all_uniform_locations(std::vector<Uniform *> uniforms);
 
     private:
         unsigned int program_id;

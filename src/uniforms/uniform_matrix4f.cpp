@@ -6,12 +6,16 @@
 
 #include "./uniforms/uniform_matrix4f.hpp"
 
+UniformMatrix4f::UniformMatrix4f() {
+
+}
+
 UniformMatrix4f::UniformMatrix4f(std::string name) : Uniform(name) {
 
 }
 
 void UniformMatrix4f::load_matrix(Matrix4f value) {
-        this->value = value;
-        
-        glUniformMatrix4fv(get_location(), 1, false, value.m);
+	this->value = value;
+
+	glUniformMatrix4fv(get_location(), 1, false, value.m);
 }

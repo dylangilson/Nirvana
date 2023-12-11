@@ -10,6 +10,7 @@
 
 class UniformFloat : public Uniform {
     public:
+        UniformFloat();
         UniformFloat(std::string name);
         void load_float(float value);
 

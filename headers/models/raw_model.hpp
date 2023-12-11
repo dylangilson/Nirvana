@@ -6,7 +6,6 @@
 
 #pragma once
 
-#include <stdlib.h>
 #include <vector>
 
 #include "./gl_objects/vao.hpp"

@@ -6,8 +6,6 @@
 
 #include "./mathematics/linear_algebra.hpp"
 
-static const float PI = 3.1415926;
-
 /** Vector2f implementation ***/
 
 Vector2f::Vector2f() {
@@ -185,12 +183,14 @@ std::ostream &operator<<(std::ostream &ret, const Matrix4f &matrix) {
 }
 
 void Matrix4f::rotateX(float angle) {
+    angle = angle * PI / 180.0f; // convert angle from degrees to radians
+
     Matrix4f rotation = IDENTITY_MATRIX;
     float sine = (float)sin(angle);
     float cosine = (float)cos(angle);
 
     rotation.m[5] = cosine;
-	rotation.m[6] = -sine;
+    rotation.m[6] = -sine;
 	rotation.m[9] = sine;
 	rotation.m[10] = cosine;
 
@@ -198,26 +198,30 @@ void Matrix4f::rotateX(float angle) {
 }
 
 void Matrix4f::rotateY(float angle) {
+    angle = angle * PI / 180.0f; // convert angle from degrees to radians
+    
     Matrix4f rotation = IDENTITY_MATRIX;
     float sine = (float)sin(angle);
 	float cosine = (float)cos(angle);
 	
 	rotation.m[0] = cosine;
-	rotation.m[8] = sine;
 	rotation.m[2] = -sine;
+	rotation.m[8] = sine;
 	rotation.m[10] = cosine;
 
     *this *= rotation;
 }
 
 void Matrix4f::rotateZ(float angle) {
+    angle = angle * PI / 180.0f; // convert angle from degrees to radians
+
     Matrix4f rotation = IDENTITY_MATRIX;
     float sine = (float)sin(angle);
 	float cosine = (float)cos(angle);
 	
 	rotation.m[0] = cosine;
-	rotation.m[1] = -sine;
-	rotation.m[4] = sine;
+	rotation.m[1] = sine;
+	rotation.m[4] = -sine;
 	rotation.m[5] = cosine;
 
     *this *= rotation;
@@ -246,6 +250,18 @@ void Matrix4f::translate(Vector3f vector) {
 	translation.m[14] = vector.z;
 
     *this *= translation;
+}
+
+void Matrix4f::transpose() {
+    std::vector<float> temp;
+
+    for (size_t i = 0; i < 16; i++) {
+        temp.push_back(m[(i * 4 + i / 4) % 16]);
+    }
+
+    for (size_t i = 0; i < 16; i++) {
+        m[i] = temp.at(i);
+    }
 }
 
 /** Vector4f implementation ***/

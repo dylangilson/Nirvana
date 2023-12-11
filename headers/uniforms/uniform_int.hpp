@@ -10,6 +10,7 @@
 
 class UniformInt : public Uniform {
     public:
+        UniformInt();
         UniformInt(std::string name);
         void load_int(int value);
 

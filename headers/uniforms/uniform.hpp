@@ -12,13 +12,15 @@
 
 class Uniform {
     public:
+        Uniform();
         Uniform(std::string name);
+        virtual ~Uniform();
         virtual void store_uniform_location(unsigned int program_id);
-
+        
     protected:
-        unsigned int get_location();
-
+        int get_location();
+        
     private:
         std::string name;
-        unsigned int location;
+        int location;
 };

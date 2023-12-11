@@ -63,6 +63,10 @@ Display::Display() {
     Display::last_frame_time = glfwGetTime();
 }
 
+float Display::get_frame_time_in_seconds() {
+    return Display::delta_time;
+}
+
 void Display::update_display() {
     switch_screen_mode();
 
@@ -79,10 +83,6 @@ void Display::update_display() {
 
     glfwSwapBuffers(Display::window);
     glfwPollEvents();
-}
-
-float Display::get_frame_time_in_seconds() {
-    return Display::delta_time;
 }
 
 void Display::switch_screen_mode() {

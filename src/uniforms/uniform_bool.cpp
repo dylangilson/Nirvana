@@ -6,6 +6,10 @@
 
 #include "./uniforms/uniform_bool.hpp"
 
+UniformBool::UniformBool() {
+    
+}
+
 UniformBool::UniformBool(std::string name) : Uniform(name) {
     used = false;
 }

@@ -6,6 +6,10 @@
 
 #include "./uniforms/uniform_sampler.hpp"
 
+UniformSampler::UniformSampler() {
+    
+}
+
 UniformSampler::UniformSampler(std::string name) : Uniform(name) {
     used = false;
 }

@@ -6,14 +6,22 @@
 
 #include "./uniforms/uniform.hpp"
 
+Uniform::Uniform() {
+    
+}
+
 Uniform::Uniform(std::string name) {
     this->name = name;
+}
+
+Uniform::~Uniform() {
+
 }
 
 void Uniform::store_uniform_location(unsigned int program_id) {
     location = glGetUniformLocation(program_id, name.c_str());
 }
 
-unsigned int Uniform::get_location() {
+int Uniform::get_location() {
     return location;
 }

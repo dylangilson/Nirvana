@@ -6,6 +6,10 @@
 
 #include "./uniforms/uniform_vector3f.hpp"
 
+UniformVector3f::UniformVector3f() {
+    
+}
+
 UniformVector3f::UniformVector3f(std::string name) : Uniform(name) {
     used = false;
 }

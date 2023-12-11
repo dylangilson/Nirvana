@@ -8,6 +8,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <vector>
 
 class Vector2f {
     public:
@@ -51,6 +52,7 @@ class Matrix4f {
         void rotateZ(float angle);
         void scale(Vector3f vector);
         void translate(Vector3f vector);
+        void transpose();
 };
 
 class Vector4f {
@@ -72,6 +74,8 @@ class Vector4f {
         void cross_product(Vector4f vector);
 };
 
+static const float PI = 3.1415926f;
+
 static const Vector4f X_AXIS = {1.0f, 0.0f, 0.0f, 0.0f};
 static const Vector4f Y_AXIS = {0.0f, 1.0f, 0.0f, 0.0f};
 static const Vector4f Z_AXIS = {0.0f, 0.0f, 1.0f, 0.0f};
@@ -84,4 +88,11 @@ static const Matrix4f IDENTITY_MATRIX = {
 	0.0f, 1.0f, 0.0f, 0.0f,
 	0.0f, 0.0f, 1.0f, 0.0f,
 	0.0f, 0.0f, 0.0f, 1.0f
+};
+
+static const Matrix4f ZERO_MATRIX = {
+	0.0f, 0.0f, 0.0f, 0.0f,
+	0.0f, 0.0f, 0.0f, 0.0f,
+	0.0f, 0.0f, 0.0f, 0.0f,
+	0.0f, 0.0f, 0.0f, 0.0f
 };

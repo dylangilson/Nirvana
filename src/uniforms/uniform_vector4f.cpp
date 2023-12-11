@@ -6,6 +6,10 @@
 
 #include "./uniforms/uniform_vector4f.hpp"
 
+UniformVector4f::UniformVector4f() {
+    
+}
+
 UniformVector4f::UniformVector4f(std::string name) : Uniform(name) {
     used = false;
 }

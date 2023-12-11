@@ -6,6 +6,10 @@
 
 #include "./uniforms/uniform_int.hpp"
 
+UniformInt::UniformInt() {
+    
+}
+
 UniformInt::UniformInt(std::string name) : Uniform(name) {
     used = false;
 }

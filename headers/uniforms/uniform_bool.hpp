@@ -10,6 +10,7 @@
 
 class UniformBool : public Uniform {
     public:
+        UniformBool();
         UniformBool(std::string name);
         void load_bool(bool value);
 
