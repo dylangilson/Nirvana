@@ -8,6 +8,9 @@
 
 Camera::Camera() {
     position = Vector3f(0.0f, 0.0f, 0.0f);
+    pitch = 0.0f;
+    yaw = 0.0f;
+    roll = 0.0f;
 }
 
 Vector3f Camera::get_position() {

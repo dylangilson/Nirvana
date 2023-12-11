@@ -8,11 +8,11 @@
 
 Matrix4f CameraAlgebra::create_transformation_matrix(Vector3f translation, Vector3f rotation, float scale) {
     Matrix4f matrix = IDENTITY_MATRIX;
+    matrix.scale(Vector3f(scale, scale, scale));
     matrix.rotateX(rotation.x);
     matrix.rotateY(rotation.y);
     matrix.rotateZ(rotation.z);
     matrix.translate(translation);
-    matrix.scale(Vector3f(scale, scale, scale));
 
     return matrix;
 }
