@@ -14,15 +14,17 @@
 
 class Renderer {
     public:
-        Renderer(EntityShader *shader);
+        Renderer();
         ~Renderer();
+        EntityShader *get_shader();
         void prepare();
-        void render(Entity *entity, EntityShader *shader);
+        void render(Entity *entity);
 
     private:
         static constexpr float FOV = 70.0f;
         static constexpr float NEAR_PLANE = 0.1f; // nearest visible point of view
         static constexpr float FAR_PLANE = 1000.0f; // furthest visible point of view
+        EntityShader *shader;
         Matrix4f projection_matrix;
 
         void create_projection_matrix();

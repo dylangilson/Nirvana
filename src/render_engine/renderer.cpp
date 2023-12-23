@@ -6,7 +6,9 @@
 
 #include "./render_engine/renderer.hpp"
 
-Renderer::Renderer(EntityShader *shader) {
+Renderer::Renderer() {
+    shader = new EntityShader();
+
     create_projection_matrix();
     
     shader->start();
@@ -15,7 +17,11 @@ Renderer::Renderer(EntityShader *shader) {
 }
 
 Renderer::~Renderer() {
+    delete shader;
+}
 
+EntityShader *Renderer::get_shader() {
+    return shader;
 }
 
 void Renderer::prepare() {
@@ -24,7 +30,7 @@ void Renderer::prepare() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void Renderer::render(Entity *entity, EntityShader *shader) {
+void Renderer::render(Entity *entity) {
     TexturedModel *textured_model = entity->get_model();
     RawModel *model = textured_model->get_raw_model();
     model->get_vao()->bind(std::vector<int>());

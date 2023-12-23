@@ -32,8 +32,7 @@ int main(int argc, char *argv[]) {
     Display display;
     RandomNumberGenerator random_number_generator;
     Loader loader;
-    EntityShader *shader = new EntityShader();
-    Renderer *renderer = new Renderer(shader);
+    Renderer *renderer = new Renderer();
     
     std::vector<float> vertices = {
         -0.5f, 0.5f, -0.5f,	
@@ -122,17 +121,16 @@ int main(int argc, char *argv[]) {
         entity->increase_rotation(Vector3f(0.1f, 0.1f, 0.0f));
         camera.move();
         renderer->prepare();
-        shader->start();
-        shader->load_view_matrix(camera);
-        renderer->render(entity, shader);
-        shader->stop();
+        renderer->get_shader()->start();
+        renderer->get_shader()->load_view_matrix(camera);
+        renderer->render(entity);
+        renderer->get_shader()->stop();
         display.update_display();
     }
 
     // clean up
     delete entity;
     delete renderer;
-    delete shader;
     
     glfwTerminate();
 

@@ -24,12 +24,7 @@ ShaderProgram::ShaderProgram(std::string vertex_shader_file, std::string fragmen
 }
 
 ShaderProgram::~ShaderProgram() {
-    stop();
-
-    glDetachShader(program_id, vertex_shader_id);
-    glDetachShader(program_id, fragment_shader_id);
-    
-    glDeleteProgram(program_id);
+    destroy();
 }
 
 void ShaderProgram::bind_attributes() {
@@ -83,4 +78,13 @@ int ShaderProgram::load_shader(std::string file_name, unsigned int type) {
     }
 
     return shader_id;
+}
+
+void ShaderProgram::destroy() {
+    stop();
+
+    glDetachShader(program_id, vertex_shader_id);
+    glDetachShader(program_id, fragment_shader_id);
+    
+    glDeleteProgram(program_id);
 }
