@@ -44,7 +44,7 @@ class Texture {
         void bind();
         void unbind();
         void set_parameters();
-        void load_data(std::string file_path);
+        void load_data(std::string filepath);
         void bind_to_unit(unsigned int unit);
 
     private:

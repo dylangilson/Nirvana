@@ -51,10 +51,15 @@ void ShaderProgram::store_all_uniform_locations(std::vector<Uniform *> uniforms)
     glValidateProgram(program_id);
 }
 
-int ShaderProgram::load_shader(std::string file_name, unsigned int type) {
+int ShaderProgram::load_shader(std::string filename, unsigned int type) {
     std::string shader_source;
     std::string current_line;
-    std::ifstream file(file_name);
+    std::string filepath = "./shaders/" + filename + ".glsl";
+    std::ifstream file(filepath);
+
+    if (!file) {
+        std::cout << "Failed to load shader: " << filename << std::endl;
+    }
 
     while (getline(file, current_line)) {
         shader_source += current_line + "\n";
@@ -73,7 +78,7 @@ int ShaderProgram::load_shader(std::string file_name, unsigned int type) {
 
     if (!success) {
         glGetShaderInfoLog(shader_id, 512, NULL, info_log);
-        std::cout << "Could not compile shader: " << file_name << std::endl << info_log << std::endl; 
+        std::cout << "Could not compile shader: " << filename << std::endl << info_log << std::endl; 
         exit(EXIT_FAILURE);
     }
 

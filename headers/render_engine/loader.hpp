@@ -18,6 +18,6 @@
 
 class Loader {
     public:
-        RawModel *load_raw_model(std::vector<float> positions, std::vector<int> indices, std::vector<float> texture_coordinates);
-        Texture *load_texture(std::string file_name);
+        RawModel *load_raw_model(std::vector<float> positions, std::vector<int> indices, std::vector<float> normals, std::vector<float> texture_coordinates);
+        Texture *load_texture(std::string filename);
 };

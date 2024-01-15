@@ -36,7 +36,7 @@ Display::Display() {
     Display::window = glfwCreateWindow(Display::WIDTH, Display::HEIGHT, "Nirvana", NULL, NULL);
 
     if (Display::window == NULL) {
-        std::cerr << "Failed to open GLFW window" << std::endl;
+        std::cout << "Failed to open GLFW window" << std::endl;
         glfwTerminate();
         exit(EXIT_FAILURE);
     }

@@ -54,6 +54,6 @@ class ShaderProgram {
         unsigned int vertex_shader_id;
         unsigned int fragment_shader_id;
 
-        static int load_shader(std::string file_name, unsigned int type);
+        static int load_shader(std::string filename, unsigned int type);
         void destroy();
 };

@@ -17,9 +17,9 @@
 #include "./mathematics/random_number_generator.hpp"
 #include "./render_engine/display.hpp"
 #include "./render_engine/loader.hpp"
+#include "./render_engine/obj_loader.hpp"
 #include "./models/raw_model.hpp"
 #include "./render_engine/renderer.hpp"
-#include "./shaders/entity_shader.hpp"
 #include "./textures/model_texture.hpp"
 #include "./models/textured_model.hpp"
 #include "./entities/camera.hpp"
@@ -32,93 +32,19 @@ int main(int argc, char *argv[]) {
     Display display;
     RandomNumberGenerator random_number_generator;
     Loader loader;
+    OBJLoader obj_loader;
     Renderer *renderer = new Renderer();
-    
-    std::vector<float> vertices = {
-        -0.5f, 0.5f, -0.5f,	
-        -0.5f, -0.5f, -0.5f,	
-        0.5f, -0.5f, -0.5f,	
-        0.5f, 0.5f, -0.5f,		
-        
-        -0.5f, 0.5f, 0.5f,	
-        -0.5f, -0.5f, 0.5f,	
-        0.5f, -0.5f, 0.5f,	
-        0.5f, 0.5f, 0.5f,
-        
-        0.5f, 0.5f, -0.5f,	
-        0.5f, -0.5f, -0.5f,	
-        0.5f, -0.5f, 0.5f,	
-        0.5f, 0.5f, 0.5f,
-        
-        -0.5f, 0.5f, -0.5f,	
-        -0.5f, -0.5f, -0.5f,	
-        -0.5f, -0.5f, 0.5f,	
-        -0.5f, 0.5f, 0.5f,
-        
-        -0.5f, 0.5f, 0.5f,
-        -0.5f, 0.5f, -0.5f,
-        0.5f, 0.5f, -0.5f,
-        0.5f, 0.5f, 0.5f,
-        
-        -0.5f, -0.5f, 0.5f,
-        -0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f, 0.5f
-    };
 
-    std::vector<int> indices = {
-        0, 1, 3,	
-        3, 1, 2,	
-        4, 5, 7,
-        7, 5, 6,
-        8, 9, 11,
-        11, 9, 10,
-        12, 13, 15,
-        15, 13, 14,	
-        16, 17, 19,
-        19, 17, 18,
-        20, 21, 23,
-        23, 21, 22
-    };
-
-    std::vector<float> texture_coordinates = {
-        0.0f, 0.0f,
-        0.0f, 1.0f,
-        1.0f, 1.0f,
-        1.0f, 0.0f,			
-        0.0f, 0.0f,
-        0.0f, 1.0f,
-        1.0f, 1.0f,
-        1.0f, 0.0f,			
-        0.0f, 0.0f,
-        0.0f, 1.0f,
-        1.0f, 1.0f,
-        1.0f, 0.0f,
-        0.0f, 0.0f,
-        0.0f, 1.0f,
-        1.0f, 1.0f,
-        1.0f, 0.0f,
-        0.0f, 0.0f,
-        0.0f, 1.0f,
-        1.0f, 1.0f,
-        1.0f, 0.0f,
-        0.0f, 0.0f,
-        0.0f, 1.0f,
-        1.0f, 1.0f,
-        1.0f, 0.0f
-    };
-
-
-    RawModel *model = loader.load_raw_model(vertices, indices, texture_coordinates);
+    RawModel *model = obj_loader.load_obj_model(loader, "dragon");
     ModelTexture *texture = new ModelTexture(loader.load_texture("OSRS LOGO"));
     TexturedModel *textured_model = new TexturedModel(model, texture);
-    Entity *entity = new Entity(textured_model, Vector3f(0.0f, 0.0f, -5.0f), Vector3f(0.0f, 0.0f, 0.0f), 1.0f);
+    Entity *entity = new Entity(textured_model, Vector3f(0.0f, 0.0f, -30.0f), Vector3f(0.0f, 0.0f, 0.0f), 1.0f);
     Camera camera;
     
     // game loop
     while (!glfwWindowShouldClose(Display::window)) {
         // render
-        entity->increase_rotation(Vector3f(0.1f, 0.1f, 0.0f));
+        entity->increase_rotation(Vector3f(0.0f, 0.1f, 0.0f));
         camera.move();
         renderer->prepare();
         renderer->get_shader()->start();
