@@ -76,7 +76,7 @@ RawModel* OBJLoader::load_obj_model(Loader loader, std::string filename) {
 
         Vector2f current_texture = texture_coordinates.at(vertex_a_y);
         textures.at(current_vertex_pointer * 2) = current_texture.x;
-        textures.at(current_vertex_pointer * 2 + 1) = 1 - current_texture.y;
+        textures.at(current_vertex_pointer * 2 + 1) = 1.0f - current_texture.y;
 
         Vector3f current_normal = normals.at(vertex_a_z);
         normal_floats.at(current_vertex_pointer * 3) = current_normal.x;

@@ -35,8 +35,9 @@ void Renderer::render(Entity *entity) {
     RawModel *model = textured_model->get_raw_model();
     model->get_vao()->bind(std::vector<int>());
 
-    glEnableVertexAttribArray(0); // 0 -> positions
+    glEnableVertexAttribArray(0); // 0 -> position
     glEnableVertexAttribArray(1); // 1 -> texture coordinates
+    glEnableVertexAttribArray(2); // 2 -> normal
 
     Matrix4f transformation_matrix = CameraAlgebra::create_transformation_matrix(entity->get_position(), entity->get_rotation(), entity->get_scale());
     shader->load_transformation_matrix(transformation_matrix);
@@ -45,8 +46,9 @@ void Renderer::render(Entity *entity) {
 
     glDrawElements(GL_TRIANGLES, model->get_indices().size(), GL_UNSIGNED_INT, model->get_indices().data());
 
-    glDisableVertexAttribArray(0); // 0 -> positions
+    glDisableVertexAttribArray(0); // 0 -> position
     glDisableVertexAttribArray(1); // 1 -> texture coordinates
+    glDisableVertexAttribArray(2); // 2 -> normal
     
     model->get_vao()->unbind(std::vector<int>());
 }

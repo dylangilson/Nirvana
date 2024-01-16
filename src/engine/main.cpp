@@ -23,6 +23,7 @@
 #include "./textures/model_texture.hpp"
 #include "./models/textured_model.hpp"
 #include "./entities/camera.hpp"
+#include "./entities/light.hpp"
 
 int main(int argc, char *argv[]) {
     // hide warnings from main arguments
@@ -39,6 +40,7 @@ int main(int argc, char *argv[]) {
     ModelTexture *texture = new ModelTexture(loader.load_texture("OSRS LOGO"));
     TexturedModel *textured_model = new TexturedModel(model, texture);
     Entity *entity = new Entity(textured_model, Vector3f(0.0f, 0.0f, -30.0f), Vector3f(0.0f, 0.0f, 0.0f), 1.0f);
+    Light light(Vector3f(0.0f, 0.0f, -20.0f), Vector3f(1.0f, 1.0f, 1.0f));
     Camera camera;
     
     // game loop
@@ -48,6 +50,7 @@ int main(int argc, char *argv[]) {
         camera.move();
         renderer->prepare();
         renderer->get_shader()->start();
+        renderer->get_shader()->load_light(light);
         renderer->get_shader()->load_view_matrix(camera);
         renderer->render(entity);
         renderer->get_shader()->stop();

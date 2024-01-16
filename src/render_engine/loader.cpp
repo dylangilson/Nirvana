@@ -10,10 +10,10 @@ RawModel *Loader::load_raw_model(std::vector<float> positions, std::vector<int> 
     VAO *vao = new VAO();
     vao->bind(std::vector<int>());
 
-    vao->create_attribute(0, positions, 3);
+    vao->create_attribute(0, 3, positions);
     vao->create_ebo(indices);
-    vao->create_attribute(1, texture_coordinates, 2);
-    vao->create_attribute(2, normals, 3);
+    vao->create_attribute(1, 2, texture_coordinates);
+    vao->create_attribute(2, 3, normals);
 
     vao->unbind(std::vector<int>());
 

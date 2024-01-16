@@ -7,7 +7,7 @@
 #include "./entities/camera.hpp"
 
 Camera::Camera() {
-    position = Vector3f(0.0f, 0.0f, 0.0f);
+    position = Vector3f(0.0f, 5.0f, 0.0f);
     pitch = 0.0f;
     yaw = 0.0f;
     roll = 0.0f;
