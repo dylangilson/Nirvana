@@ -42,6 +42,9 @@ void Renderer::render(Entity *entity) {
     Matrix4f transformation_matrix = CameraAlgebra::create_transformation_matrix(entity->get_position(), entity->get_rotation(), entity->get_scale());
     shader->load_transformation_matrix(transformation_matrix);
 
+    ModelTexture *texture = textured_model->get_model_texture();
+    shader->load_specular_lighting(texture->get_shine_damper(), texture->get_reflectivity());
+
     textured_model->get_model_texture()->get_texture()->bind_to_unit(0);
 
     glDrawElements(GL_TRIANGLES, model->get_indices().size(), GL_UNSIGNED_INT, model->get_indices().data());

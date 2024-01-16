@@ -15,9 +15,11 @@ EntityShader::EntityShader() : ShaderProgram(VERTEX_SHADER_FILE, FRAGMENT_SHADER
     view_matrix = new UniformMatrix4f("view_matrix");
     light_position = new UniformVector3f("light_position");
     light_colour = new UniformVector3f("light_colour");
+    shine_damper = new UniformFloat("shine_damper");
+    reflectivity = new UniformFloat("reflectivity");
 
     store_all_uniform_locations(std::vector<Uniform *> {
-        transformation_matrix, projection_matrix, view_matrix, light_position, light_colour
+        transformation_matrix, projection_matrix, view_matrix, light_position, light_colour, shine_damper, reflectivity
     });
 }
 
@@ -27,6 +29,8 @@ EntityShader::~EntityShader() {
     delete view_matrix;
     delete light_position;
     delete light_colour;
+    delete shine_damper;
+    delete reflectivity;
 }
 
 void EntityShader::bind_attributes() {
@@ -52,4 +56,9 @@ void EntityShader::load_view_matrix(Camera camera) {
 void EntityShader::load_light(Light light) {
     light_position->load_vector(light.get_position());
     light_colour->load_vector(light.get_colour());
+}
+
+void EntityShader::load_specular_lighting(float shine_damper, float reflectivity) {
+    this->shine_damper->load_float(shine_damper);
+    this->reflectivity->load_float(reflectivity);
 }

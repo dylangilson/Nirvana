@@ -21,3 +21,19 @@ Texture *ModelTexture::get_texture() {
 unsigned int ModelTexture::get_id() {
     return texture->get_id();
 }
+
+float ModelTexture::get_shine_damper() {
+    return shine_damper;
+}
+
+void ModelTexture::set_shine_damper(float shine_damper) {
+    this->shine_damper = shine_damper;
+}
+
+float ModelTexture::get_reflectivity() {
+    return reflectivity;
+}
+
+void ModelTexture::set_reflectivity(float reflectivity) {
+    this->reflectivity = reflectivity;
+}

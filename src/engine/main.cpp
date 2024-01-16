@@ -37,23 +37,34 @@ int main(int argc, char *argv[]) {
     Renderer *renderer = new Renderer();
 
     RawModel *model = obj_loader.load_obj_model(loader, "dragon");
+
     ModelTexture *texture = new ModelTexture(loader.load_texture("OSRS LOGO"));
+    texture->set_shine_damper(10.0f);
+    texture->set_reflectivity(1.0f);
     TexturedModel *textured_model = new TexturedModel(model, texture);
+    
     Entity *entity = new Entity(textured_model, Vector3f(0.0f, 0.0f, -30.0f), Vector3f(0.0f, 0.0f, 0.0f), 1.0f);
+
     Light light(Vector3f(0.0f, 0.0f, -20.0f), Vector3f(1.0f, 1.0f, 1.0f));
     Camera camera;
     
     // game loop
     while (!glfwWindowShouldClose(Display::window)) {
         // render
-        entity->increase_rotation(Vector3f(0.0f, 0.1f, 0.0f));
+        entity->increase_rotation(Vector3f(0.0f, 1.0f, 0.0f));
+
         camera.move();
+
         renderer->prepare();
+
         renderer->get_shader()->start();
         renderer->get_shader()->load_light(light);
         renderer->get_shader()->load_view_matrix(camera);
+
         renderer->render(entity);
+
         renderer->get_shader()->stop();
+
         display.update_display();
     }
 
