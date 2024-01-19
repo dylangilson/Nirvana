@@ -18,7 +18,7 @@ void main(void) {
 
     // diffuse lighting
     float normal_dot_light = dot(unit_normal, unit_light_vector);
-    float brightness = max(normal_dot_light, 0.0);
+    float brightness = max(normal_dot_light, 0.2); // this also adds ambient lighting due to non-zero minimum value
     vec3 diffuse_lighting = brightness * light_colour;
 
     // specular lighting

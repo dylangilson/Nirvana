@@ -31,16 +31,16 @@ float Camera::get_roll() {
 
 void Camera::move() {
     if (glfwGetKey(Display::window, GLFW_KEY_W) == GLFW_PRESS) {
-        position.z -= 0.02f;
+        position.z -= 0.25f;
     }
     if (glfwGetKey(Display::window, GLFW_KEY_A) == GLFW_PRESS) {
-        position.x -= 0.02f;
+        position.x -= 0.25f;
     }
     if (glfwGetKey(Display::window, GLFW_KEY_S) == GLFW_PRESS) {
-        position.z += 0.02f;
+        position.z += 0.25f;
     }
     if (glfwGetKey(Display::window, GLFW_KEY_D) == GLFW_PRESS) {
-        position.x += 0.02f;
+        position.x += 0.25f;
     }
 }
 

@@ -14,7 +14,7 @@ Entity::Entity(TexturedModel *model, Vector3f position, Vector3f rotation, float
 }
 
 Entity::~Entity() {
-    delete model;
+    
 }
 
 TexturedModel *Entity::get_model() {
