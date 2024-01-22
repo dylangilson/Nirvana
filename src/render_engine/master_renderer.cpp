@@ -13,33 +13,64 @@ MasterRenderer::MasterRenderer() {
     create_projection_matrix();
 
     this->entity_renderer = new EntityRenderer(projection_matrix);
+    this->outlining_renderer = new OutliningRenderer(projection_matrix);
 }
 
 MasterRenderer::~MasterRenderer() {
     delete entity_renderer;
+    delete outlining_renderer;
 }
 
 EntityRenderer *MasterRenderer::get_entity_renderer() {
     return entity_renderer;
 }
 
+OutliningRenderer *MasterRenderer::get_outlining_renderer() {
+    return outlining_renderer;
+}
+
 void MasterRenderer::prepare() {
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_STENCIL_TEST);
+
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
 void MasterRenderer::render(Light sun, Camera camera) {
     prepare();
 
+    // render entity
     entity_renderer->get_shader()->start();
 
     entity_renderer->get_shader()->load_light(sun);
     entity_renderer->get_shader()->load_view_matrix(camera);
 
+    glStencilFunc(GL_ALWAYS, 1, 0xFF);
+    glStencilMask(0xFF);
+
     entity_renderer->render(entities);
 
     entity_renderer->get_shader()->stop();
+
+    glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+    glStencilMask(0x00);
+    glDisable(GL_DEPTH_TEST);  
+
+    // render outlined entity
+    outlining_renderer->get_shader()->start();
+    
+    outlining_renderer->get_shader()->load_view_matrix(camera);
+
+    outlining_renderer->render(entities.begin()->second.at(0));
+
+    outlining_renderer->get_shader()->stop();
+
+    glStencilMask(0xFF);
+    glStencilFunc(GL_ALWAYS, 0, 0xFF);
+    glEnable(GL_DEPTH_TEST);
 
     entities.clear();
 }

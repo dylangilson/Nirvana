@@ -27,7 +27,7 @@ void main(void) {
     vec3 reflected_light_direction = reflect(light_direction, unit_normal);
     float specular_lighting_factor = max(dot(reflected_light_direction, unit_camera_vector), 0.0);
     float shine_damping_factor = pow(specular_lighting_factor, shine_damper);
-    vec3 specular_lighting = shine_damping_factor * light_colour;
+    vec3 specular_lighting = shine_damping_factor * reflectivity * light_colour;
 
     out_colour = vec4(diffuse_lighting, 1.0) * texture(texture_sampler, out_texture_coordinates) + vec4(specular_lighting, 1.0);
 }
