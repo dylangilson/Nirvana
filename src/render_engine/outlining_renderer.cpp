@@ -33,12 +33,14 @@ void OutliningRenderer::prepare_textured_model(TexturedModel *textured_model) {
     model->get_vao()->bind(std::vector<int>());
 
     glEnableVertexAttribArray(0); // 0 -> position
+    glEnableVertexAttribArray(1); // 1 -> normal
 
     textured_model->get_model_texture()->get_texture()->bind_to_unit(0);
 }
 
 void OutliningRenderer::unbind_textured_model(TexturedModel *textured_model) {
     glDisableVertexAttribArray(0); // 0 -> position
+    glDisableVertexAttribArray(1); // 1 -> normal
     
     textured_model->get_raw_model()->get_vao()->unbind(std::vector<int>());
 }

@@ -35,8 +35,8 @@ EntityShader::~EntityShader() {
 
 void EntityShader::bind_attributes() {
     bind_attribute(0, "in_position"); // 0 -> position
-    bind_attribute(1, "in_texture_coordinates"); // 1 -> texture coordinates
-    bind_attribute(2, "in_normal"); // 2 -> normal
+    bind_attribute(1, "in_normal"); // 1 -> normal
+    bind_attribute(2, "in_texture_coordinates"); // 2 -> texture coordinates
 }
 
 void EntityShader::load_transformation_matrix(Matrix4f matrix) {

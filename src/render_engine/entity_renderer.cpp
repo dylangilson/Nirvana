@@ -32,8 +32,8 @@ void EntityRenderer::prepare_textured_model(TexturedModel *textured_model) {
     model->get_vao()->bind(std::vector<int>());
 
     glEnableVertexAttribArray(0); // 0 -> position
-    glEnableVertexAttribArray(1); // 1 -> texture coordinates
-    glEnableVertexAttribArray(2); // 2 -> normal
+    glEnableVertexAttribArray(1); // 1 -> normal
+    glEnableVertexAttribArray(2); // 2 -> texture coordinates
 
     ModelTexture *texture = textured_model->get_model_texture();
     shader->load_specular_lighting(texture->get_shine_damper(), texture->get_reflectivity());
@@ -43,8 +43,8 @@ void EntityRenderer::prepare_textured_model(TexturedModel *textured_model) {
 
 void EntityRenderer::unbind_textured_model(TexturedModel *textured_model) {
     glDisableVertexAttribArray(0); // 0 -> position
-    glDisableVertexAttribArray(1); // 1 -> texture coordinates
-    glDisableVertexAttribArray(2); // 2 -> normal
+    glDisableVertexAttribArray(1); // 1 -> normal
+    glDisableVertexAttribArray(2); // 2 -> texture coordinates
     
     textured_model->get_raw_model()->get_vao()->unbind(std::vector<int>());
 }

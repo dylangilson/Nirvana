@@ -29,6 +29,7 @@ OutliningShader::~OutliningShader() {
 
 void OutliningShader::bind_attributes() {
     bind_attribute(0, "in_position"); // 0 -> position
+    bind_attribute(1, "in_normal"); // 1 -> normal
 }
 
 void OutliningShader::load_transformation_matrix(Matrix4f matrix) {

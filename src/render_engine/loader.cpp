@@ -12,9 +12,9 @@ RawModel *Loader::load_raw_model(std::vector<float> positions, std::vector<int> 
 
     vao->create_attribute(0, 3, positions);
     vao->create_ebo(indices);
-    vao->create_attribute(1, 2, texture_coordinates);
-    vao->create_attribute(2, 3, normals);
-
+    vao->create_attribute(1, 3, normals);
+    vao->create_attribute(2, 2, texture_coordinates);
+    
     vao->unbind(std::vector<int>());
 
     return new RawModel(vao, indices);
