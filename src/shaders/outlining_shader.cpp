@@ -13,10 +13,10 @@ OutliningShader::OutliningShader() : ShaderProgram(VERTEX_SHADER_FILE, FRAGMENT_
     transformation_matrix = new UniformMatrix4f("transformation_matrix");
     projection_matrix = new UniformMatrix4f("projection_matrix");
     view_matrix = new UniformMatrix4f("view_matrix");
-    thickness = new UniformFloat("thickness");
+    outline_colour = new UniformVector3f("outline_colour");
 
     store_all_uniform_locations(std::vector<Uniform *> {
-        transformation_matrix, projection_matrix, view_matrix, thickness
+        transformation_matrix, projection_matrix, view_matrix, outline_colour
     });
 }
 
@@ -24,7 +24,7 @@ OutliningShader::~OutliningShader() {
     delete transformation_matrix;
     delete projection_matrix;
     delete view_matrix;
-    delete thickness;
+    delete outline_colour;
 }
 
 void OutliningShader::bind_attributes() {
@@ -44,4 +44,8 @@ void OutliningShader::load_view_matrix(Camera camera) {
     Matrix4f matrix = CameraAlgebra::create_view_matrix(camera);
 
     view_matrix->load_matrix(matrix);
+}
+
+void OutliningShader::load_outline_colour(Vector3f colour) {
+    outline_colour->load_vector(colour);
 }

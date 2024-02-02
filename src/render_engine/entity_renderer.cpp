@@ -59,7 +59,8 @@ void EntityRenderer::render(std::unordered_map<TexturedModel *, std::vector<Enti
 
         std::vector<Entity *> batch = entities[textured_model];
         for (size_t i = 0; i < batch.size(); i++) {
-            prepare_instance(batch.at(i));
+            Entity *entity = batch.at(i);
+            prepare_instance(entity);
 
             glDrawElements(GL_TRIANGLES, textured_model->get_raw_model()->get_indices().size(), GL_UNSIGNED_INT, textured_model->get_raw_model()->get_indices().data());
         }

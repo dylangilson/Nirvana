@@ -63,6 +63,7 @@ void MasterRenderer::render(Light sun, Camera camera) {
     outlining_renderer->get_shader()->start();
     
     outlining_renderer->get_shader()->load_view_matrix(camera);
+    outlining_renderer->get_shader()->load_outline_colour(entities.begin()->second.at(0)->get_outline_colour());
 
     outlining_renderer->render(entities.begin()->second.at(0));
 

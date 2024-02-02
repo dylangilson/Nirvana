@@ -24,7 +24,7 @@ OutliningShader *OutliningRenderer::get_shader() {
 }
 
 void OutliningRenderer::prepare_instance(Entity *entity) {
-    Matrix4f transformation_matrix = CameraAlgebra::create_transformation_matrix(entity->get_position(), entity->get_rotation(), entity->get_scale() * 1.015);
+    Matrix4f transformation_matrix = CameraAlgebra::create_transformation_matrix(entity->get_position(), entity->get_rotation(), entity->get_scale());
     shader->load_transformation_matrix(transformation_matrix);
 }
 

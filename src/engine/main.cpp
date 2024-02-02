@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
     TexturedModel *textured_model = new TexturedModel(model, texture);
 
     std::vector<Entity *> entities;
-    Entity *entity = new Entity(textured_model, Vector3f(0.0f, 0.0f, -30.0f), Vector3f(0.0f, 0.0f, 0.0f), 1.0f);
+    Entity *entity = new Entity(textured_model, Vector3f(0.0f, 0.0f, -30.0f), Vector3f(0.0f, 0.0f, 0.0f), Vector3f(0.0f, 1.0f, 1.0f), 1.0f);
     entities.push_back(entity);
 
     Light sun(Vector3f(0.0f, 0.0f, -20.0f), Vector3f(1.0f, 1.0f, 1.0f));
@@ -52,9 +52,9 @@ int main(int argc, char *argv[]) {
     
     // game loop
     while (!glfwWindowShouldClose(Display::window)) {
-        // render
         camera.move();
 
+        // render phase
         for (size_t i = 0; i < entities.size(); i++) {
             entities.at(i)->increase_rotation(Vector3f(0.0f, 1.0f, 0.0f));
             master_renderer->process_entity(entities.at(i));

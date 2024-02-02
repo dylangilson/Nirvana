@@ -9,8 +9,8 @@
 #include "./entities/camera.hpp"
 #include "./mathematics/camera_algebra.hpp"
 #include "./shaders/shader_program.hpp"
-#include "./uniforms/uniform_float.hpp"
 #include "./uniforms/uniform_matrix4f.hpp"
+#include "./uniforms/uniform_vector3f.hpp"
 
 class OutliningShader : public ShaderProgram {
     public:
@@ -23,10 +23,11 @@ class OutliningShader : public ShaderProgram {
         void load_transformation_matrix(Matrix4f matrix);
         void load_projection_matrix(Matrix4f matrix);
         void load_view_matrix(Camera camera);
+        void load_outline_colour(Vector3f colour);
 
     protected:
         UniformMatrix4f *transformation_matrix;
         UniformMatrix4f *projection_matrix;
         UniformMatrix4f *view_matrix;
-        UniformFloat *thickness;
+        UniformVector3f *outline_colour;
 };
