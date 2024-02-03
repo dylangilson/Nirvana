@@ -10,10 +10,11 @@
 #include <unordered_map>
 #include <vector>
 
-#include "display.hpp"
+#include "./entities/entity.hpp"
 #include "./mathematics/camera_algebra.hpp"
 #include "./mathematics/linear_algebra.hpp"
-#include "./entities/entity.hpp"
+#include "./models/raw_model.hpp"
+#include "./models/textured_model.hpp"
 #include "./shaders/entity_shader.hpp"
 
 class EntityRenderer {

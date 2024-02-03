@@ -12,13 +12,15 @@ MasterRenderer::MasterRenderer() {
 
     create_projection_matrix();
 
-    this->entity_renderer = new EntityRenderer(projection_matrix);
-    this->outlining_renderer = new OutliningRenderer(projection_matrix);
+    entity_renderer = new EntityRenderer(projection_matrix);
+    outlining_renderer = new OutliningRenderer(projection_matrix);
+    terrain_renderer = new TerrainRenderer(projection_matrix);
 }
 
 MasterRenderer::~MasterRenderer() {
     delete entity_renderer;
     delete outlining_renderer;
+    delete terrain_renderer;
 }
 
 EntityRenderer *MasterRenderer::get_entity_renderer() {
@@ -27,6 +29,10 @@ EntityRenderer *MasterRenderer::get_entity_renderer() {
 
 OutliningRenderer *MasterRenderer::get_outlining_renderer() {
     return outlining_renderer;
+}
+
+TerrainRenderer *MasterRenderer::get_terrain_renderer() {
+    return terrain_renderer;
 }
 
 void MasterRenderer::prepare() {
@@ -73,7 +79,19 @@ void MasterRenderer::render(Light sun, Camera camera) {
     glStencilFunc(GL_ALWAYS, 0, 0xFF);
     glEnable(GL_DEPTH_TEST);
 
+    // render terrain
+    terrain_renderer->get_shader()->start();
+
+    terrain_renderer->get_shader()->load_light(sun);
+    terrain_renderer->get_shader()->load_view_matrix(camera);
+
+    terrain_renderer->render(terrains);
+
+    terrain_renderer->get_shader()->stop();
+
+    // end of render phase
     entities.clear();
+    terrains.clear();
 }
 
 void MasterRenderer::process_entity(Entity *entity) {
@@ -89,6 +107,10 @@ void MasterRenderer::process_entity(Entity *entity) {
 
     std::vector<Entity *> *batch = &entities.find(textured_model)->second;
     batch->push_back(entity);
+}
+
+void MasterRenderer::process_terrain(Terrain *terrain) {
+    terrains.push_back(terrain);
 }
 
 void MasterRenderer::create_projection_matrix() {

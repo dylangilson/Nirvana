@@ -11,11 +11,13 @@
 
 #include "entity_renderer.hpp"
 #include "outlining_renderer.hpp"
+#include "terrain_renderer.hpp"
 #include "./entities/entity.hpp"
 #include "./entities/light.hpp"
 #include "./entities/camera.hpp"
 #include "./models/textured_model.hpp"
 #include "./shaders/entity_shader.hpp"
+#include "./terrain/terrain.hpp"
 
 class MasterRenderer {
     public:
@@ -23,10 +25,12 @@ class MasterRenderer {
         ~MasterRenderer();
         EntityRenderer *get_entity_renderer();
         OutliningRenderer *get_outlining_renderer();
+        TerrainRenderer *get_terrain_renderer();
 
         void prepare();
         void render(Light sun, Camera camera);
         void process_entity(Entity *entity);
+        void process_terrain(Terrain *terrain);
 
     private:
         static constexpr float FOV = 70.0f;
@@ -35,7 +39,9 @@ class MasterRenderer {
         Matrix4f projection_matrix;
         EntityRenderer *entity_renderer;
         OutliningRenderer *outlining_renderer;
+        TerrainRenderer *terrain_renderer;
         std::unordered_map<TexturedModel *, std::vector<Entity *>> entities;
+        std::vector<Terrain *> terrains;
         
         void create_projection_matrix();
 };

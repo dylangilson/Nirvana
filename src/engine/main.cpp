@@ -24,6 +24,7 @@
 #include "./models/textured_model.hpp"
 #include "./entities/camera.hpp"
 #include "./entities/light.hpp"
+#include "./terrain/terrain.hpp"
 
 int main(int argc, char *argv[]) {
     // hide warnings from main arguments
@@ -36,7 +37,7 @@ int main(int argc, char *argv[]) {
     OBJLoader obj_loader;
     MasterRenderer *master_renderer = new MasterRenderer();
 
-    RawModel *model = obj_loader.load_obj_model(loader, "dragon");
+    RawModel *model = obj_loader.load_obj_model(loader, "Dragon");
 
     ModelTexture *texture = new ModelTexture(loader.load_texture("OSRS LOGO"));
     texture->set_shine_damper(10.0f);
@@ -44,10 +45,17 @@ int main(int argc, char *argv[]) {
     TexturedModel *textured_model = new TexturedModel(model, texture);
 
     std::vector<Entity *> entities;
-    Entity *entity = new Entity(textured_model, Vector3f(0.0f, 0.0f, -30.0f), Vector3f(0.0f, 0.0f, 0.0f), Vector3f(0.0f, 1.0f, 1.0f), 1.0f);
+    Entity *entity = new Entity(textured_model, Vector3f(0.0f, 5.0f, -30.0f), Vector3f(0.0f, 0.0f, 0.0f), Vector3f(0.0f, 1.0f, 1.0f), 1.0f);
     entities.push_back(entity);
 
     Light sun(Vector3f(0.0f, 0.0f, -20.0f), Vector3f(1.0f, 1.0f, 1.0f));
+
+    std::vector<Terrain *> terrains;
+    Terrain *terrain = new Terrain(0, -1, loader, new ModelTexture(loader.load_texture("Lava")));
+    Terrain *terrain2 = new Terrain(-1, -1, loader, new ModelTexture(loader.load_texture("Lava")));
+    terrains.push_back(terrain);
+    terrains.push_back(terrain2);
+
     Camera camera;
     
     // game loop
@@ -60,8 +68,13 @@ int main(int argc, char *argv[]) {
             master_renderer->process_entity(entities.at(i));
         }
 
+        for (size_t i = 0; i < terrains.size(); i++) {
+            master_renderer->process_terrain(terrains.at(i));
+        }
+
         master_renderer->render(sun, camera);
 
+        // end of frame
         display.update_display();
     }
 
