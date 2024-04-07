@@ -17,9 +17,11 @@ EntityShader::EntityShader() : ShaderProgram(VERTEX_SHADER_FILE, FRAGMENT_SHADER
     light_colour = new UniformVector3f("light_colour");
     shine_damper = new UniformFloat("shine_damper");
     reflectivity = new UniformFloat("reflectivity");
+    transparency = new UniformFloat("transparency");
+    use_fake_lighting = new UniformFloat("use_fake_lighting");
 
     store_all_uniform_locations(std::vector<Uniform *> {
-        transformation_matrix, projection_matrix, view_matrix, light_position, light_colour, shine_damper, reflectivity
+        transformation_matrix, projection_matrix, view_matrix, light_position, light_colour, shine_damper, reflectivity, transparency, use_fake_lighting
     });
 }
 
@@ -31,6 +33,8 @@ EntityShader::~EntityShader() {
     delete light_colour;
     delete shine_damper;
     delete reflectivity;
+    delete transparency;
+    delete use_fake_lighting;
 }
 
 void EntityShader::bind_attributes() {
@@ -61,4 +65,12 @@ void EntityShader::load_light(Light light) {
 void EntityShader::load_specular_lighting(float shine_damper, float reflectivity) {
     this->shine_damper->load_float(shine_damper);
     this->reflectivity->load_float(reflectivity);
+}
+
+void EntityShader::load_transparency(float transparency) {
+    this->transparency->load_float(transparency);
+}
+
+void EntityShader::load_fake_lighting(float use_fake_lighting) {
+    this->use_fake_lighting->load_float(use_fake_lighting);
 }

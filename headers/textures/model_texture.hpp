@@ -18,9 +18,15 @@ class ModelTexture {
         void set_shine_damper(float shine_damper);
         float get_reflectivity();
         void set_reflectivity(float reflectivity);
+        bool get_transparency();
+        void set_transparency(bool transparency);
+        bool get_use_fake_lighting();
+        void set_use_fake_lighting(bool use_fake_lighting);
 
     private:
         Texture *texture;
         float shine_damper = 1.0f;
         float reflectivity = 0.0f;
+        bool transparency = false;
+        bool use_fake_lighting = false;
 };

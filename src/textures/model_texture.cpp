@@ -37,3 +37,19 @@ float ModelTexture::get_reflectivity() {
 void ModelTexture::set_reflectivity(float reflectivity) {
     this->reflectivity = reflectivity;
 }
+
+bool ModelTexture::get_transparency() {
+    return transparency;
+}
+
+void ModelTexture::set_transparency(bool transparency) {
+    this->transparency = transparency;
+}
+
+bool ModelTexture::get_use_fake_lighting() {
+    return use_fake_lighting;
+}
+
+void ModelTexture::set_use_fake_lighting(bool use_fake_lighting) {
+    this->use_fake_lighting = use_fake_lighting;
+}

@@ -29,6 +29,8 @@ class MasterRenderer {
 
         void prepare();
         void render(Light sun, Camera camera);
+        static void enable_culling();
+        static void disable_culling();
         void process_entity(Entity *entity);
         void process_terrain(Terrain *terrain);
 

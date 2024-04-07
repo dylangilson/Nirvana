@@ -5,6 +5,7 @@
  */
 
 #include "./render_engine/entity_renderer.hpp"
+#include "./render_engine/master_renderer.hpp"
 
 EntityRenderer::EntityRenderer(Matrix4f projection_matrix) {
     shader = new EntityShader();
@@ -36,12 +37,20 @@ void EntityRenderer::prepare_textured_model(TexturedModel *textured_model) {
     glEnableVertexAttribArray(2); // 2 -> texture coordinates
 
     ModelTexture *texture = textured_model->get_model_texture();
+    if (texture->get_transparency()) {
+        MasterRenderer::disable_culling();
+    }
+
+    shader->load_transparency(texture->get_transparency());
+    shader->load_fake_lighting(texture->get_use_fake_lighting());
     shader->load_specular_lighting(texture->get_shine_damper(), texture->get_reflectivity());
 
     textured_model->get_model_texture()->get_texture()->bind_to_unit(0);
 }
 
 void EntityRenderer::unbind_textured_model(TexturedModel *textured_model) {
+    MasterRenderer::enable_culling();
+
     glDisableVertexAttribArray(0); // 0 -> position
     glDisableVertexAttribArray(1); // 1 -> normal
     glDisableVertexAttribArray(2); // 2 -> texture coordinates

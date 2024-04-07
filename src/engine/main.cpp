@@ -37,15 +37,23 @@ int main(int argc, char *argv[]) {
     OBJLoader obj_loader;
     MasterRenderer *master_renderer = new MasterRenderer();
 
-    RawModel *model = obj_loader.load_obj_model(loader, "Dragon");
+    RawModel *dragon_model = obj_loader.load_obj_model(loader, "Dragon");
+    ModelTexture *osrs_logo = new ModelTexture(loader.load_texture("OSRS LOGO"));
+    osrs_logo->set_shine_damper(10.0f);
+    osrs_logo->set_reflectivity(1.0f);
+    TexturedModel *dragon = new TexturedModel(dragon_model, osrs_logo);
 
-    ModelTexture *texture = new ModelTexture(loader.load_texture("OSRS LOGO"));
-    texture->set_shine_damper(10.0f);
-    texture->set_reflectivity(1.0f);
-    TexturedModel *textured_model = new TexturedModel(model, texture);
+    RawModel *fern_model = obj_loader.load_obj_model(loader, "Fern");
+    ModelTexture *fern_texture = new ModelTexture(loader.load_texture("Fern"));
+    fern_texture->set_transparency(true);
+    TexturedModel *fern = new TexturedModel(fern_model, fern_texture);
 
     std::vector<Entity *> entities;
-    Entity *entity = new Entity(textured_model, Vector3f(0.0f, 5.0f, -30.0f), Vector3f(0.0f, 0.0f, 0.0f), Vector3f(0.0f, 1.0f, 1.0f), 1.0f);
+    for (size_t i = 0; i < 500; i++) {
+        entities.push_back(new Entity(fern, Vector3f(random_number_generator.rand() * 800 - 400, 0, random_number_generator.rand() * -600), Vector3f(0, 0, 0), Vector3f(0, 1.0f, 1.0f), 0.6f));
+    }
+
+    Entity *entity = new Entity(dragon, Vector3f(0.0f, 5.0f, -30.0f), Vector3f(0.0f, 0.0f, 0.0f), Vector3f(0.0f, 1.0f, 1.0f), 1.0f);
     entities.push_back(entity);
 
     Light sun(Vector3f(0.0f, 0.0f, -20.0f), Vector3f(1.0f, 1.0f, 1.0f));
@@ -82,7 +90,11 @@ int main(int argc, char *argv[]) {
     for (size_t i = 0; i < entities.size(); i++) {
         delete entities.at(i);
     }
-    delete textured_model;
+    for (size_t i = 0; i < terrains.size(); i++) {
+        delete terrains.at(i);
+    }
+    delete fern;
+    delete dragon;
     delete master_renderer;
     
     glfwTerminate();

@@ -11,6 +11,7 @@ uniform sampler2D texture_sampler;
 uniform vec3 light_colour;
 uniform float shine_damper;
 uniform float reflectivity;
+uniform float transparency;
 
 void main(void) {
     vec3 unit_normal = normalize(out_surface_normal);
@@ -29,5 +30,11 @@ void main(void) {
     float shine_damping_factor = pow(specular_lighting_factor, shine_damper);
     vec3 specular_lighting = shine_damping_factor * reflectivity * light_colour;
 
-    out_colour = vec4(diffuse_lighting, 1.0) * texture(texture_sampler, out_texture_coordinates) + vec4(specular_lighting, 1.0);
+    // transparency
+    vec4 texture_colour = texture(texture_sampler, out_texture_coordinates);
+    if (transparency == 1.0 && texture_colour.a < 0.5) {
+        discard;
+    }
+
+    out_colour = vec4(diffuse_lighting, 1.0) * texture_colour + vec4(specular_lighting, 1.0);
 }

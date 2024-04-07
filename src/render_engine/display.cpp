@@ -83,6 +83,7 @@ void Display::update_display() {
 
     glfwSwapBuffers(Display::window);
     glfwPollEvents();
+    glfwSwapInterval(1);
 }
 
 void Display::switch_screen_mode() {

@@ -7,9 +7,7 @@
 #include "./render_engine/master_renderer.hpp"
 
 MasterRenderer::MasterRenderer() {
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-
+    enable_culling();
     create_projection_matrix();
 
     entity_renderer = new EntityRenderer(projection_matrix);
@@ -43,6 +41,15 @@ void MasterRenderer::prepare() {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+}
+
+void MasterRenderer::enable_culling() {
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+}
+
+void MasterRenderer::disable_culling() {
+    glDisable(GL_CULL_FACE);
 }
 
 void MasterRenderer::render(Light sun, Camera camera) {
