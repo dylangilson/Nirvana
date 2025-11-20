@@ -93,6 +93,7 @@ int main(int argc, char *argv[]) {
     for (size_t i = 0; i < terrains.size(); i++) {
         delete terrains.at(i);
     }
+    
     delete fern;
     delete dragon;
     delete master_renderer;

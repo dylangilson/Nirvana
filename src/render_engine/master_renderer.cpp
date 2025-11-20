@@ -68,11 +68,11 @@ void MasterRenderer::render(Light sun, Camera camera) {
 
     entity_renderer->get_shader()->stop();
 
+    // render outlined entity
     glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
     glStencilMask(0x00);
     glDisable(GL_DEPTH_TEST);  
 
-    // render outlined entity
     outlining_renderer->get_shader()->start();
     
     outlining_renderer->get_shader()->load_view_matrix(camera);

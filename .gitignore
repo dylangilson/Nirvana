@@ -1,7 +1,9 @@
 # folders
 .vscode/
+build/
 res/
 
 # files
+nirvana
 *.o
 *.obj
