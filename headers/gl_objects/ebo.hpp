@@ -35,7 +35,7 @@ class EBO {
         unsigned int get_id();
         void bind();
         void unbind();
-        void store_data(std::vector<int> data);
+        void store_data(std::vector<unsigned int> data);
 
     private:
         unsigned int id = 0;

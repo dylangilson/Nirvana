@@ -42,7 +42,7 @@ class VAO {
         EBO *get_ebo();
         void bind(std::vector<int> attributes);
         void unbind(std::vector<int> attributes);
-        void create_ebo(std::vector<int> indices);
+        void create_ebo(std::vector<unsigned int> indices);
         void create_attribute(unsigned int attribute_id, size_t attribute_size, std::vector<float> data);
         void create_attribute(unsigned int attribute_id, size_t attribute_size, std::vector<int> data);
 

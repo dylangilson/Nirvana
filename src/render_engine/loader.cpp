@@ -6,7 +6,7 @@
 
 #include "./render_engine/loader.hpp"
 
-RawModel *Loader::load_raw_model(std::vector<float> positions, std::vector<int> indices, std::vector<float> normals, std::vector<float> texture_coordinates) {
+RawModel *Loader::load_raw_model(std::vector<float> positions, std::vector<unsigned int> indices, std::vector<float> normals, std::vector<float> texture_coordinates) {
     VAO *vao = new VAO();
     vao->bind(std::vector<int>());
 

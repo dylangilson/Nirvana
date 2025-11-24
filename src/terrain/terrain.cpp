@@ -22,7 +22,7 @@ RawModel *Terrain::generate_terrain(Loader loader) {
     int count = VERTEX_COUNT * VERTEX_COUNT;
     size_t index = 0;
     std::vector<float> vertices(count * 3);
-    std::vector<int> indices((VERTEX_COUNT - 1) * (VERTEX_COUNT - 1) * 6);
+    std::vector<unsigned int> indices((VERTEX_COUNT - 1) * (VERTEX_COUNT - 1) * 6);
     std::vector<float> normals(count * 3);
     std::vector<float> texture_coordinates(count * 2);
     

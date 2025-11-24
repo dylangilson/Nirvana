@@ -44,7 +44,7 @@ std::ostream &operator<<(std::ostream &ret, const Vector2f &vector) {
 }
 
 void Vector2f::normalize() {
-    float magnitude = sqrt(x * x + y * y);
+    float magnitude = length();
 
     // vector already normalized
     if (magnitude == 0.0f || magnitude == 1.0f) {
@@ -57,6 +57,10 @@ void Vector2f::normalize() {
 
 float Vector2f::dot_product(Vector2f vector) {
     return x * vector.x + y * vector.y;
+}
+
+float Vector2f::length() const {
+    return sqrt(x * x + y * y);
 }
 
 /** Vector3f implementation ***/
@@ -101,7 +105,7 @@ std::ostream &operator<<(std::ostream &ret, const Vector3f &vector) {
 }
 
 void Vector3f::normalize() {
-    float magnitude = sqrt(x * x + y * y + z * z);
+    float magnitude = length();
 
     // vector already normalized
     if (magnitude == 0.0f || magnitude == 1.0f) {
@@ -127,6 +131,10 @@ void Vector3f::cross_product(Vector3f vector) {
     x = ret.x;
     y = ret.y;
     z = ret.z;
+}
+
+float Vector3f::length() const {
+    return sqrt(x * x + y * y + z * z);
 }
 
 /** Matrix4f implementation ***/

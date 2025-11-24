@@ -22,6 +22,7 @@ class Vector2f {
         friend std::ostream &operator<<(std::ostream &ret, const Vector2f &vector);
         void normalize();
         float dot_product(Vector2f vector);
+        float length() const;
 };
 
 class Vector3f {
@@ -38,6 +39,7 @@ class Vector3f {
         void normalize();
         float dot_product(Vector3f vector);
         void cross_product(Vector3f vector);
+        float length() const;
 };
 
 class Matrix4f {

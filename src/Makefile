@@ -1,7 +1,7 @@
 NAME = nirvana
 
 CC = g++
-CXXFLAGS = -g -Wall -Werror -Wextra -std=c++11 -pedantic -lglfw -ldl -I ../headers
+CXXFLAGS = -g -Wall -Werror -Wextra -std=c++14 -pedantic -lglfw -ldl -I ../headers
 
 INCLUDES = $(patsubst %, ../headers/, */%.hpp)
 SRCS = $(wildcard */*.cpp)

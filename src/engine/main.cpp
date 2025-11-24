@@ -18,6 +18,7 @@
 #include "./render_engine/display.hpp"
 #include "./render_engine/loader.hpp"
 #include "./render_engine/obj_loader.hpp"
+#include "./render_engine/model_data.hpp"
 #include "./models/raw_model.hpp"
 #include "./render_engine/master_renderer.hpp"
 #include "./textures/model_texture.hpp"
@@ -37,13 +38,17 @@ int main(int argc, char *argv[]) {
     OBJLoader obj_loader;
     MasterRenderer *master_renderer = new MasterRenderer();
 
-    RawModel *dragon_model = obj_loader.load_obj_model(loader, "Dragon");
-    ModelTexture *osrs_logo = new ModelTexture(loader.load_texture("OSRS LOGO"));
+    ModelData dragon_model_data = obj_loader.load_obj_model("Dragon");
+    RawModel *dragon_model = loader.load_raw_model(dragon_model_data.get_vertices(), dragon_model_data.get_indices(), dragon_model_data.get_normals(), dragon_model_data.get_texture_coordinates());
+    // RawModel *dragon_model = obj_loader.load_obj_model(loader, "Dragon");
+    ModelTexture *osrs_logo = new ModelTexture(loader.load_texture("OSRS Logo"));
     osrs_logo->set_shine_damper(10.0f);
     osrs_logo->set_reflectivity(1.0f);
     TexturedModel *dragon = new TexturedModel(dragon_model, osrs_logo);
 
-    RawModel *fern_model = obj_loader.load_obj_model(loader, "Fern");
+    ModelData fern_model_data = obj_loader.load_obj_model("Fern");
+    RawModel *fern_model = loader.load_raw_model(fern_model_data.get_vertices(), fern_model_data.get_indices(), fern_model_data.get_normals(), fern_model_data.get_texture_coordinates());
+    // RawModel *fern_model = obj_loader.load_obj_model(loader, "Fern");
     ModelTexture *fern_texture = new ModelTexture(loader.load_texture("Fern"));
     fern_texture->set_transparency(true);
     TexturedModel *fern = new TexturedModel(fern_model, fern_texture);

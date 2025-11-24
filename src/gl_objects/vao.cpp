@@ -43,7 +43,7 @@ void VAO::unbind(std::vector<int> attributes) {
     unbind();
 }
 
-void VAO::create_ebo(std::vector<int> indices) {
+void VAO::create_ebo(std::vector<unsigned int> indices) {
     ebo = new EBO();
     ebo->bind();
 

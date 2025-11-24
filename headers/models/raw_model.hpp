@@ -12,12 +12,12 @@
 
 class RawModel {
     public:
-        RawModel(VAO *vao, std::vector<int> indices);
+        RawModel(VAO *vao, std::vector<unsigned int> indices);
         ~RawModel();
         VAO *get_vao();
-        std::vector<int> get_indices();   
+        std::vector<unsigned int> get_indices();   
 
     private:
         VAO *vao;
-        std::vector<int> indices;
+        std::vector<unsigned int> indices;
 };

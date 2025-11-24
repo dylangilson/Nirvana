@@ -26,7 +26,7 @@ void EBO::unbind() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void EBO::store_data(std::vector<int> data) {
+void EBO::store_data(std::vector<unsigned int> data) {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, data.size() * sizeof(int), data.data(), GL_STATIC_DRAW);
 }
 

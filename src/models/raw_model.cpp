@@ -6,7 +6,7 @@
 
 #include "./models/raw_model.hpp"
 
-RawModel::RawModel(VAO *vao, std::vector<int> indices) {
+RawModel::RawModel(VAO *vao, std::vector<unsigned int> indices) {
     this->vao = vao;
     this->indices = indices;
 }
@@ -19,6 +19,6 @@ VAO *RawModel::get_vao() {
     return vao;
 }
 
-std::vector<int> RawModel::get_indices() {
+std::vector<unsigned int> RawModel::get_indices() {
     return indices;
 }
