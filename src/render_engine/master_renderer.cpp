@@ -38,7 +38,7 @@ void MasterRenderer::prepare() {
     glEnable(GL_STENCIL_TEST);
 
     glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(RED, GREEN, BLUE, 1.0f);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
@@ -58,6 +58,7 @@ void MasterRenderer::render(Light sun, Camera camera) {
     // render entity
     entity_renderer->get_shader()->start();
 
+    entity_renderer->get_shader()->load_sky_colour(Vector3f(RED, GREEN, BLUE));
     entity_renderer->get_shader()->load_light(sun);
     entity_renderer->get_shader()->load_view_matrix(camera);
 
@@ -89,6 +90,7 @@ void MasterRenderer::render(Light sun, Camera camera) {
     // render terrain
     terrain_renderer->get_shader()->start();
 
+    terrain_renderer->get_shader()->load_sky_colour(Vector3f(RED, GREEN, BLUE));
     terrain_renderer->get_shader()->load_light(sun);
     terrain_renderer->get_shader()->load_view_matrix(camera);
 

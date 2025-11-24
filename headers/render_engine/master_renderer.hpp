@@ -38,6 +38,9 @@ class MasterRenderer {
         static constexpr float FOV = 70.0f;
         static constexpr float NEAR_PLANE = 0.1f; // nearest visible point of view
         static constexpr float FAR_PLANE = 1000.0f; // furthest visible point of view
+        static constexpr float RED = 0.0f;
+        static constexpr float GREEN = 0.0f;
+        static constexpr float BLUE = 0.0f;
         Matrix4f projection_matrix;
         EntityRenderer *entity_renderer;
         OutliningRenderer *outlining_renderer;

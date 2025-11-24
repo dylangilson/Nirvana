@@ -4,6 +4,7 @@ in vec2 out_texture_coordinates;
 in vec3 out_surface_normal;
 in vec3 out_to_light_vector;
 in vec3 out_to_camera_vector;
+in float out_visibility;
 
 out vec4 out_colour;
 
@@ -12,6 +13,7 @@ uniform vec3 light_colour;
 uniform float shine_damper;
 uniform float reflectivity;
 uniform float transparency;
+uniform vec3 sky_colour;
 
 void main(void) {
     vec3 unit_normal = normalize(out_surface_normal);
@@ -32,9 +34,11 @@ void main(void) {
 
     // transparency
     vec4 texture_colour = texture(texture_sampler, out_texture_coordinates);
+
     if (transparency == 1.0 && texture_colour.a < 0.5) {
         discard;
     }
 
     out_colour = vec4(diffuse_lighting, 1.0) * texture_colour + vec4(specular_lighting, 1.0);
+    out_colour = mix(vec4(sky_colour, 1.0), out_colour, out_visibility);
 }

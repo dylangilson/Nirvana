@@ -29,6 +29,7 @@ class EntityShader : public ShaderProgram {
         void load_specular_lighting(float shine_damper, float reflectivity);
         void load_transparency(float transparency);
         void load_fake_lighting(float use_fake_lighting);
+        void load_sky_colour(Vector3f sky_colour);
 
     protected:
         UniformMatrix4f *transformation_matrix;
@@ -40,4 +41,5 @@ class EntityShader : public ShaderProgram {
         UniformFloat *reflectivity;
         UniformFloat *transparency;
         UniformFloat *use_fake_lighting;
+        UniformVector3f *sky_colour;
 };

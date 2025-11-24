@@ -55,6 +55,7 @@ void VAO::create_ebo(std::vector<int> indices) {
 void VAO::create_attribute(unsigned int attribute_id, size_t attribute_size, std::vector<float> data) {
     VBO *vbo = new VBO();
     vbo->bind();
+    
     vbos.push_back(vbo);  
 
     vbo->store_data(data);

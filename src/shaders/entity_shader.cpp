@@ -19,9 +19,10 @@ EntityShader::EntityShader() : ShaderProgram(VERTEX_SHADER_FILE, FRAGMENT_SHADER
     reflectivity = new UniformFloat("reflectivity");
     transparency = new UniformFloat("transparency");
     use_fake_lighting = new UniformFloat("use_fake_lighting");
+    sky_colour = new UniformVector3f("sky_colour");
 
     store_all_uniform_locations(std::vector<Uniform *> {
-        transformation_matrix, projection_matrix, view_matrix, light_position, light_colour, shine_damper, reflectivity, transparency, use_fake_lighting
+        transformation_matrix, projection_matrix, view_matrix, light_position, light_colour, shine_damper, reflectivity, transparency, use_fake_lighting, sky_colour
     });
 }
 
@@ -35,6 +36,7 @@ EntityShader::~EntityShader() {
     delete reflectivity;
     delete transparency;
     delete use_fake_lighting;
+    delete sky_colour;
 }
 
 void EntityShader::bind_attributes() {
@@ -73,4 +75,8 @@ void EntityShader::load_transparency(float transparency) {
 
 void EntityShader::load_fake_lighting(float use_fake_lighting) {
     this->use_fake_lighting->load_float(use_fake_lighting);
+}
+
+void EntityShader::load_sky_colour(Vector3f sky_colour) {
+    this->sky_colour->load_vector(sky_colour);
 }
