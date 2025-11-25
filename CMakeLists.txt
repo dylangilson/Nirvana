@@ -1,14 +1,19 @@
 cmake_minimum_required(VERSION 3.20)
 project(Nirvana LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if (MSVC)
     add_compile_options(
         /W4
-        # /WX
+        /wd4244
+        /wd4267
+        /wd4458
+        /WX
     )
+
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /ENTRY:mainCRTStartup")
 else()
     add_compile_options(
         -g
@@ -36,7 +41,8 @@ FetchContent_MakeAvailable(glfw)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+# add_executable(${PROJECT_NAME} ${SOURCES}) # build executible to open with terminal
+add_executable(${PROJECT_NAME} WIN32 ${SOURCES}) # build executible to open without terminal
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
