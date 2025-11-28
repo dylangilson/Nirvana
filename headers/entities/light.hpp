@@ -12,9 +12,9 @@ class Light {
     public:
         Light(Vector3f position, Vector3f colour);
         Vector3f get_position();
-        void set_position(Vector3f position);
+        void set_position(Vector3f value);
         Vector3f get_colour();
-        void set_colour(Vector3f colour);
+        void set_colour(Vector3f value);
 
     private:
         Vector3f position;

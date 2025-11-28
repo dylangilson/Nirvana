@@ -15,13 +15,13 @@ class ModelTexture {
         Texture *get_texture();
         unsigned int get_id();
         float get_shine_damper();
-        void set_shine_damper(float shine_damper);
+        void set_shine_damper(float shine_damper_value);
         float get_reflectivity();
-        void set_reflectivity(float reflectivity);
+        void set_reflectivity(float reflectivity_value);
         bool get_transparency();
-        void set_transparency(bool transparency);
+        void set_transparency(bool transparency_value);
         bool get_use_fake_lighting();
-        void set_use_fake_lighting(bool use_fake_lighting);
+        void set_use_fake_lighting(bool fake_lighting_value);
 
     private:
         Texture *texture;

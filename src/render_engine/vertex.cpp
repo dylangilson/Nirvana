@@ -6,7 +6,13 @@
 
 #include "./render_engine/vertex.hpp"
 
-Vertex::Vertex(int index, const Vector3f &position) : position(position), index(index), length(position.length()) {}
+Vertex::Vertex(int index, const Vector3f &position) : position(position), index(index), length(position.length()) {
+
+}
+
+Vertex::~Vertex() {
+    
+}
 
 int Vertex::get_index() const {
     return index;
@@ -24,16 +30,16 @@ bool Vertex::has_same_texture_and_normal(int texture_index_other, int normal_ind
     return texture_index_other == texture_index && normal_index_other == normal_index;
 }
 
-void Vertex::set_texture_index(int texture_index) {
-    this->texture_index = texture_index;
+void Vertex::set_texture_index(int texture_index_value) {
+    this->texture_index = texture_index_value;
 }
 
-void Vertex::set_normal_index(int normal_index) {
-    this->normal_index = normal_index;
+void Vertex::set_normal_index(int normal_index_value) {
+    this->normal_index = normal_index_value;
 }
 
-void Vertex::set_duplicate_vertex(Vertex *duplicate_vertex) {
-    this->duplicate_vertex = duplicate_vertex;
+void Vertex::set_duplicate_vertex(Vertex *vertex) {
+    this->duplicate_vertex = vertex;
 }
 
 const Vector3f &Vertex::get_position() const {

@@ -59,7 +59,7 @@ void VAO::create_attribute(unsigned int attribute_id, size_t attribute_size, std
     vbos.push_back(vbo);  
 
     vbo->store_data(data);
-    glVertexAttribPointer(attribute_id, attribute_size, GL_FLOAT, false, attribute_size * sizeof(float), (void *)0);
+    glVertexAttribPointer(attribute_id, static_cast<GLint>(attribute_size), GL_FLOAT, false, static_cast<GLsizei>(attribute_size * sizeof(float)), (void *)0);
 
     vbo->unbind();
 }
@@ -70,7 +70,7 @@ void VAO::create_attribute(unsigned int attribute_id, size_t attribute_size, std
     vbos.push_back(vbo);
 
     vbo->store_data(data);
-    glVertexAttribIPointer(attribute_id, attribute_size, GL_INT, attribute_size * sizeof(int), (void *)0);
+    glVertexAttribIPointer(attribute_id, static_cast<GLint>(attribute_size), GL_INT, static_cast<GLsizei>(attribute_size * sizeof(int)), (void *)0);
 
     vbo->unbind();
 }

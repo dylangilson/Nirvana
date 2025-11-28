@@ -15,14 +15,14 @@ Vector3f Light::get_position() {
     return position;
 }
 
-void Light::set_position(Vector3f position) {
-    this->position = position;
+void Light::set_position(Vector3f value) {
+    this->position = value;
 }
 
 Vector3f Light::get_colour() {
     return colour;
 }
 
-void Light::set_colour(Vector3f colour) {
-    this->colour = colour;
+void Light::set_colour(Vector3f value) {
+    this->colour = value;
 }

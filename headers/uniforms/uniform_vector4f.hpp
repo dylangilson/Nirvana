@@ -16,6 +16,6 @@ class UniformVector4f : public Uniform {
         void load_vector(Vector4f value);
 
     private:
-        Vector4f value;
+        Vector4f buffer;
         bool used;
 };

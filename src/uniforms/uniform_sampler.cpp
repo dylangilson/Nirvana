@@ -15,10 +15,10 @@ UniformSampler::UniformSampler(std::string name) : Uniform(name) {
 }
 
 void UniformSampler::load_texture_unit(int value) {
-    if (!used || this->value != value) {
+    if (!used || this->buffer != value) {
         glUniform1i(get_location(), value);
 
-        this->value = value;
+        this->buffer = value;
         used = true;
     }
 }

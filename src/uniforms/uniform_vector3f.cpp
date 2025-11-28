@@ -18,7 +18,7 @@ void UniformVector3f::load_vector(Vector3f value) {
     if (!used) {
         glUniform3f(get_location(), value.x, value.y, value.z);
 
-        this->value = value;
+        this->buffer = value;
         used = true;
     }
 }

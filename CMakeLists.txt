@@ -7,9 +7,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 if (MSVC)
     add_compile_options(
         /W4
-        /wd4244
-        /wd4267
-        /wd4458
         /WX
     )
 
@@ -41,8 +38,14 @@ FetchContent_MakeAvailable(glfw)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 
-# add_executable(${PROJECT_NAME} ${SOURCES}) # build executible to open with terminal
-add_executable(${PROJECT_NAME} WIN32 ${SOURCES}) # build executible to open without terminal
+add_executable(${PROJECT_NAME} ${SOURCES}) # build executible to open with terminal
+# add_executable(${PROJECT_NAME} WIN32 ${SOURCES}) # build executible to open without terminal
+
+set_source_files_properties(
+    ${CMAKE_SOURCE_DIR}/src/engine/stb_image.cpp
+    PROPERTIES
+        COMPILE_FLAGS "/W0"
+)
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory

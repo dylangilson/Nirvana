@@ -64,19 +64,19 @@ void EntityShader::load_light(Light light) {
     light_colour->load_vector(light.get_colour());
 }
 
-void EntityShader::load_specular_lighting(float shine_damper, float reflectivity) {
-    this->shine_damper->load_float(shine_damper);
-    this->reflectivity->load_float(reflectivity);
+void EntityShader::load_specular_lighting(float shine_damper_value, float reflectivity_value) {
+    this->shine_damper->load_float(shine_damper_value);
+    this->reflectivity->load_float(reflectivity_value);
 }
 
-void EntityShader::load_transparency(float transparency) {
-    this->transparency->load_float(transparency);
+void EntityShader::load_transparency(float transparency_value) {
+    this->transparency->load_float(transparency_value);
 }
 
-void EntityShader::load_fake_lighting(float use_fake_lighting) {
-    this->use_fake_lighting->load_float(use_fake_lighting);
+void EntityShader::load_fake_lighting(float fake_lighting_value) {
+    this->use_fake_lighting->load_float(fake_lighting_value);
 }
 
-void EntityShader::load_sky_colour(Vector3f sky_colour) {
-    this->sky_colour->load_vector(sky_colour);
+void EntityShader::load_sky_colour(Vector3f colour) {
+    this->sky_colour->load_vector(colour);
 }

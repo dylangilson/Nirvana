@@ -14,18 +14,18 @@ UniformMatrix4fVector::UniformMatrix4fVector(std::string name, size_t count) : U
     this->count = count;
 
     for (size_t i = 0; i < count; i++) {
-        value.push_back(UniformMatrix4f(name + "[" + std::to_string(i) + "]"));
+        buffer.push_back(UniformMatrix4f(name + "[" + std::to_string(i) + "]"));
     }
 }
 
 void UniformMatrix4fVector::load_matrix4f_vector(std::vector<Matrix4f> matrices) {
     for (size_t i = 0; i < count; i++) {
-        value.at(i).load_matrix(matrices.at(i));
+        buffer.at(i).load_matrix(matrices.at(i));
     }
 }
 
 void UniformMatrix4fVector::store_uniform_location(unsigned int program_id) {
     for (size_t i = 0; i < count; i++) {
-        value.at(i).store_uniform_location(program_id);
+        buffer.at(i).store_uniform_location(program_id);
     }
 }

@@ -16,5 +16,5 @@ class UniformMatrix4f : public Uniform {
         void load_matrix(Matrix4f value);
 
     private:
-        Matrix4f value;
+        Matrix4f buffer;
 };

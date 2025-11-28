@@ -15,10 +15,10 @@ UniformInt::UniformInt(std::string name) : Uniform(name) {
 }
 
 void UniformInt::load_int(int value) {
-    if (!used || this->value != value) {
+    if (!used || this->buffer != value) {
         glUniform1i(get_location(), value);
 
-        this->value = value;
+        this->buffer = value;
         used = true;
     }
 }

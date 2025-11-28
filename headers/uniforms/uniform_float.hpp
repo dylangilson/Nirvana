@@ -15,6 +15,6 @@ class UniformFloat : public Uniform {
         void load_float(float value);
 
     private:
-        float value;
+        float buffer;
         bool used;
 };

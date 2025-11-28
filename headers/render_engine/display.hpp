@@ -19,7 +19,7 @@ class Display {
         static GLFWmonitor **monitors;
         static const GLFWvidmode *mode;
         static int frame_count;
-        static long last_frame_time; // time of last frame in milliseconds
+        static double last_frame_time; // time of last frame in milliseconds
         static float delta_time;
         static int count_monitors;
         static int monitor_x;

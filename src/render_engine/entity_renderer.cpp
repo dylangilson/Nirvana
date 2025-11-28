@@ -58,8 +58,8 @@ void EntityRenderer::unbind_textured_model(TexturedModel *textured_model) {
     textured_model->get_raw_model()->get_vao()->unbind(std::vector<int>());
 }
 
-void EntityRenderer::render(std::unordered_map<TexturedModel *, std::vector<Entity *>> entities) {
-    std::unordered_map<TexturedModel *, std::vector<Entity *>>::iterator iter;
+void EntityRenderer::render(std::map<TexturedModel *, std::vector<Entity *>> entities) {
+    std::map<TexturedModel *, std::vector<Entity *>>::iterator iter;
 
     for (iter = entities.begin(); iter != entities.end(); iter++) {
         TexturedModel *textured_model = iter->first;
@@ -71,7 +71,7 @@ void EntityRenderer::render(std::unordered_map<TexturedModel *, std::vector<Enti
             Entity *entity = batch.at(i);
             prepare_instance(entity);
 
-            glDrawElements(GL_TRIANGLES, textured_model->get_raw_model()->get_indices().size(), GL_UNSIGNED_INT, textured_model->get_raw_model()->get_indices().data());
+            glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(textured_model->get_raw_model()->get_indices().size()), GL_UNSIGNED_INT, textured_model->get_raw_model()->get_indices().data());
         }
 
         unbind_textured_model(textured_model);

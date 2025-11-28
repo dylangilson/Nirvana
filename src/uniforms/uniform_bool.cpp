@@ -15,10 +15,10 @@ UniformBool::UniformBool(std::string name) : Uniform(name) {
 }
 
 void UniformBool::load_bool(bool value) {
-    if (!used || this->value != value) {
+    if (!used || this->buffer != value) {
         glUniform1f(get_location(), value ? 1.0f : 0.0f);
 
-        this->value = value;
+        this->buffer = value;
         used = true;
     }
 }

@@ -15,6 +15,6 @@ class UniformInt : public Uniform {
         void load_int(int value);
 
     private:
-        int value;
+        int buffer;
         bool used;
 };

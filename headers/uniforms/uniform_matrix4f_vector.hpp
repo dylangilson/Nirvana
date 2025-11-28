@@ -20,6 +20,6 @@ class UniformMatrix4fVector : public Uniform {
         void store_uniform_location(unsigned int program_id);
 
     private:
-        std::vector<UniformMatrix4f> value;
+        std::vector<UniformMatrix4f> buffer;
         size_t count;
 };

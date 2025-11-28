@@ -7,7 +7,7 @@
 #pragma once
 
 #include <iterator>
-#include <unordered_map>
+#include <map>
 #include <vector>
 
 #include "./entities/entity.hpp"
@@ -25,7 +25,7 @@ class EntityRenderer {
         void prepare_instance(Entity *entity);
         void prepare_textured_model(TexturedModel *textured_model);
         void unbind_textured_model(TexturedModel *textured_model);
-        void render(std::unordered_map<TexturedModel *, std::vector<Entity *>> entities);
+        void render(std::map<TexturedModel *, std::vector<Entity *>> entities);
 
     private:
         EntityShader *shader;

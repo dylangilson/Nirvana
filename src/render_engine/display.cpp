@@ -10,7 +10,7 @@ const GLFWvidmode *Display::mode = NULL;
 GLFWwindow *Display::window = NULL;
 GLFWmonitor **Display::monitors = NULL;
 int Display::frame_count = 0;
-long Display::last_frame_time = 0;
+double Display::last_frame_time = 0;
 float Display::delta_time = 0.0f;
 int Display::count_monitors = 0;
 int Display::monitor_x = 0;
@@ -51,8 +51,8 @@ Display::Display() {
 
     Display::monitors = glfwGetMonitors(&Display::count_monitors);
     Display::mode = glfwGetVideoMode(Display::monitors[0]);
-    Display::monitor_width = Display::mode->width / 1.5;
-    Display::monitor_height = Display::mode->height / 16 * 9;
+    Display::monitor_width = int(Display::mode->width / 1.5);
+    Display::monitor_height = int((Display::mode->height / 16) * 9);
 
     glfwGetMonitorPos(Display::monitors[0], &Display::monitor_x, &Display::monitor_y);
     glfwSetWindowPos(Display::window, Display::monitor_x + (Display::mode->width - Display::monitor_width) / 2, Display::monitor_y + (Display::mode->height - Display::monitor_height) / 2);
@@ -70,9 +70,9 @@ float Display::get_frame_time_in_seconds() {
 void Display::update_display() {
     switch_screen_mode();
 
-    long current_frame_time = glfwGetTime();
+    double current_frame_time = glfwGetTime();
     Display::frame_count++;
-    Display::delta_time = (current_frame_time - Display::last_frame_time) / 1000.0f; // delta_time stores time in seconds
+    Display::delta_time = (float)(current_frame_time - Display::last_frame_time) / 1000.0f; // delta_time stores time in seconds
 
     if (current_frame_time - Display::last_frame_time >= 1.0) {
         std::cout << "FPS: " << Display::frame_count << std::endl;

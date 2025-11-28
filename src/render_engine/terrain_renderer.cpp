@@ -59,7 +59,7 @@ void TerrainRenderer::render(std::vector<Terrain *> terrains) {
 
         RawModel *model = terrain->get_model();
 
-        glDrawElements(GL_TRIANGLES, model->get_indices().size(), GL_UNSIGNED_INT, model->get_indices().data());
+        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(model->get_indices().size()), GL_UNSIGNED_INT, model->get_indices().data());
 
         unbind_textured_model(terrain);
     }

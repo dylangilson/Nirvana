@@ -60,12 +60,12 @@ void TerrainShader::load_light(Light light) {
     light_colour->load_vector(light.get_colour());
 }
 
-void TerrainShader::load_specular_lighting(float shine_damper, float reflectivity) {
-    this->shine_damper->load_float(shine_damper);
-    this->reflectivity->load_float(reflectivity);
+void TerrainShader::load_specular_lighting(float shine_damper_value, float reflectivity_value) {
+    this->shine_damper->load_float(shine_damper_value);
+    this->reflectivity->load_float(reflectivity_value);
 }
 
-void TerrainShader::load_sky_colour(Vector3f sky_colour) {
-    this->sky_colour->load_vector(sky_colour);
+void TerrainShader::load_sky_colour(Vector3f colour) {
+    this->sky_colour->load_vector(colour);
 }
 

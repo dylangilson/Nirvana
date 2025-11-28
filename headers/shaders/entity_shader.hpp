@@ -26,10 +26,10 @@ class EntityShader : public ShaderProgram {
         void load_projection_matrix(Matrix4f matrix);
         void load_view_matrix(Camera camera);
         void load_light(Light light);
-        void load_specular_lighting(float shine_damper, float reflectivity);
-        void load_transparency(float transparency);
-        void load_fake_lighting(float use_fake_lighting);
-        void load_sky_colour(Vector3f sky_colour);
+        void load_specular_lighting(float shine_damper_value, float reflectivity_value);
+        void load_transparency(float transparency_value);
+        void load_fake_lighting(float fake_lighting_value);
+        void load_sky_colour(Vector3f colour);
 
     protected:
         UniformMatrix4f *transformation_matrix;

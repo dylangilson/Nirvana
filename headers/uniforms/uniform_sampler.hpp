@@ -15,6 +15,6 @@ class UniformSampler : public Uniform {
         void load_texture_unit(int value);
 
     private:
-        int value;
+        int buffer;
         bool used;
 };

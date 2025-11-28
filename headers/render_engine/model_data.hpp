@@ -11,6 +11,7 @@
 class ModelData {
     public:
         ModelData(const std::vector<float> &vertices, const std::vector<float> &texture_coordinates, const std::vector<float> &normals, const std::vector<unsigned int> &indices, float furthest_point);
+        ~ModelData();
         const std::vector<float> &get_vertices() const;
         const std::vector<float> &get_texture_coordinates() const;
         const std::vector<float> &get_normals() const;

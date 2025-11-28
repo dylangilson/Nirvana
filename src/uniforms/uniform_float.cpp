@@ -15,10 +15,10 @@ UniformFloat::UniformFloat(std::string name) : Uniform(name) {
 }
 
 void UniformFloat::load_float(float value) {
-    if (!used || this->value != value) {
+    if (!used || this->buffer != value) {
         glUniform1f(get_location(), value);
 
-        this->value = value;
+        this->buffer = value;
         used = true;
     }
 }

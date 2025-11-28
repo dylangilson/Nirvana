@@ -51,7 +51,7 @@ void OutliningRenderer::render(Entity *entity) {
     prepare_textured_model(textured_model);
     prepare_instance(entity);
 
-    glDrawElements(GL_TRIANGLES, textured_model->get_raw_model()->get_indices().size(), GL_UNSIGNED_INT, textured_model->get_raw_model()->get_indices().data());
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(textured_model->get_raw_model()->get_indices().size()), GL_UNSIGNED_INT, textured_model->get_raw_model()->get_indices().data());
 
     unbind_textured_model(textured_model);
 }

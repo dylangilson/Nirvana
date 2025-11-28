@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <unordered_map>
+#include <map>
 #include <vector>
 
 #include "entity_renderer.hpp"
@@ -45,7 +45,7 @@ class MasterRenderer {
         EntityRenderer *entity_renderer;
         OutliningRenderer *outlining_renderer;
         TerrainRenderer *terrain_renderer;
-        std::unordered_map<TexturedModel *, std::vector<Entity *>> entities;
+        std::map<TexturedModel *, std::vector<Entity *>> entities;
         std::vector<Terrain *> terrains;
         
         void create_projection_matrix();

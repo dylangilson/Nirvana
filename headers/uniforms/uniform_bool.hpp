@@ -15,6 +15,6 @@ class UniformBool : public Uniform {
         void load_bool(bool value);
 
     private:
-        bool value;
+        bool buffer;
         bool used;
 };

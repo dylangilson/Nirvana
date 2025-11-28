@@ -7,7 +7,13 @@
 #include "./render_engine/model_data.hpp"
 
 ModelData::ModelData(const std::vector<float> &vertices, const std::vector<float> &texture_coordinates, const std::vector<float> &normals, const std::vector<unsigned int> &indices, float furthest_point) :
-    vertices(vertices), texture_coordinates(texture_coordinates), normals(normals), indices(indices), furthest_point(furthest_point) {}
+    vertices(vertices), texture_coordinates(texture_coordinates), normals(normals), indices(indices), furthest_point(furthest_point) {
+
+}
+
+ModelData::~ModelData() {
+    
+}
 
 const std::vector<float> &ModelData::get_vertices() const {
     return vertices;

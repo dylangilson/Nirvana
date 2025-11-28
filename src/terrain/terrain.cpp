@@ -45,12 +45,12 @@ RawModel *Terrain::generate_terrain(Loader loader) {
 
     index = 0;
 
-    for (size_t generator_z = 0; generator_z < VERTEX_COUNT - 1; generator_z++) {
-        for (size_t generator_x = 0; generator_x < VERTEX_COUNT - 1; generator_x++) {
-            int top_left = generator_z * VERTEX_COUNT + generator_x;
-            int top_right = top_left + 1;
-            int bottom_left = (generator_z + 1) * VERTEX_COUNT + generator_x;
-            int bottom_right = bottom_left + 1;
+    for (unsigned int generator_z = 0; generator_z < VERTEX_COUNT - 1; generator_z++) {
+        for (unsigned int generator_x = 0; generator_x < VERTEX_COUNT - 1; generator_x++) {
+            unsigned int top_left = generator_z * VERTEX_COUNT + generator_x;
+            unsigned int top_right = top_left + 1;
+            unsigned int bottom_left = (generator_z + 1) * VERTEX_COUNT + generator_x;
+            unsigned int bottom_right = bottom_left + 1;
 
             indices.at(index++) = top_left;
             indices.at(index++) = bottom_left;

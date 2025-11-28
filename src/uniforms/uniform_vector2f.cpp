@@ -18,7 +18,7 @@ void UniformVector2f::load_vector(Vector2f value) {
     if (!used) {
         glUniform2f(get_location(), value.x, value.y);
 
-        this->value = value;
+        this->buffer = value;
         used = true;
     }
 }
