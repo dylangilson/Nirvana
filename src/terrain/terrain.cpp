@@ -6,8 +6,9 @@
 
 #include "./terrain/terrain.hpp"
 
-Terrain::Terrain(int x_length, int z_length, Loader loader, ModelTexture *texture) {
-    this->texture = texture;
+Terrain::Terrain(int x_length, int z_length, Loader loader, TerrainTexturePack *texture_pack, TerrainTexture *blend_map) {
+    this->texture_pack = texture_pack;
+    this->blend_map = blend_map;
     this->x = x_length * SIZE;
     this->z = z_length * SIZE;
     this->model = generate_terrain(loader);
@@ -15,7 +16,8 @@ Terrain::Terrain(int x_length, int z_length, Loader loader, ModelTexture *textur
 
 Terrain::~Terrain() {
     delete model;
-    delete texture;
+    delete texture_pack;
+    delete blend_map;
 }
 
 RawModel *Terrain::generate_terrain(Loader loader) {
@@ -68,8 +70,12 @@ RawModel *Terrain::get_model() {
     return model;
 }
 
-ModelTexture *Terrain::get_texture() {
-    return texture;
+TerrainTexturePack *Terrain::get_texture_pack() {
+    return texture_pack;
+}
+
+TerrainTexture *Terrain::get_blend_map() {
+    return blend_map;
 }
 
 float Terrain::get_x() {

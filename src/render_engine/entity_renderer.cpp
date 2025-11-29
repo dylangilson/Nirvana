@@ -46,6 +46,7 @@ void EntityRenderer::prepare_textured_model(TexturedModel *textured_model) {
     shader->load_specular_lighting(texture->get_shine_damper(), texture->get_reflectivity());
 
     textured_model->get_model_texture()->get_texture()->bind_to_unit(0);
+    textured_model->get_model_texture()->get_texture()->bind();
 }
 
 void EntityRenderer::unbind_textured_model(TexturedModel *textured_model) {

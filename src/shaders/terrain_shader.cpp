@@ -18,9 +18,14 @@ TerrainShader::TerrainShader() : ShaderProgram(VERTEX_SHADER_FILE, FRAGMENT_SHAD
     shine_damper = new UniformFloat("shine_damper");
     reflectivity = new UniformFloat("reflectivity");
     sky_colour = new UniformVector3f("sky_colour");
+    background_texture = new UniformSampler("background_texture");
+    red_texture = new UniformSampler("red_texture");
+    green_texture = new UniformSampler("green_texture");
+    blue_texture = new UniformSampler("blue_texture");
+    blend_map = new UniformSampler("blend_map");
 
     store_all_uniform_locations(std::vector<Uniform *> {
-        transformation_matrix, projection_matrix, view_matrix, light_position, light_colour, shine_damper, reflectivity, sky_colour
+        transformation_matrix, projection_matrix, view_matrix, light_position, light_colour, shine_damper, reflectivity, sky_colour, background_texture, red_texture, green_texture, blue_texture, blend_map
     });
 }
 
@@ -33,6 +38,11 @@ TerrainShader::~TerrainShader() {
     delete shine_damper;
     delete reflectivity;
     delete sky_colour;
+    delete background_texture;
+    delete red_texture;
+    delete green_texture;
+    delete blue_texture;
+    delete blend_map;
 }
 
 void TerrainShader::bind_attributes() {
@@ -69,3 +79,10 @@ void TerrainShader::load_sky_colour(Vector3f colour) {
     this->sky_colour->load_vector(colour);
 }
 
+void TerrainShader::connect_texture_units() {
+    this->background_texture->load_texture_unit(0);
+    this->red_texture->load_texture_unit(1);
+    this->green_texture->load_texture_unit(2);
+    this->blue_texture->load_texture_unit(3);
+    this->blend_map->load_texture_unit(4);
+}

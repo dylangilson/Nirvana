@@ -26,6 +26,8 @@
 #include "./entities/camera.hpp"
 #include "./entities/light.hpp"
 #include "./terrain/terrain.hpp"
+#include "./textures/terrain_texture.hpp"
+#include "./textures/terrain_texture_pack.hpp"
 
 int main(int argc, char *argv[]) {
     // hide warnings from main arguments
@@ -37,6 +39,13 @@ int main(int argc, char *argv[]) {
     Loader loader;
     OBJLoader obj_loader;
     MasterRenderer *master_renderer = new MasterRenderer();
+
+    TerrainTexture *blend_map = new TerrainTexture(loader.load_texture("BlendMap"));
+    TerrainTexture *background_texture = new TerrainTexture(loader.load_texture("Lava"));
+    TerrainTexture *red_texture = new TerrainTexture(loader.load_texture("Path"));
+    TerrainTexture *green_texture = new TerrainTexture(loader.load_texture("Grass"));
+    TerrainTexture *blue_texture = new TerrainTexture(loader.load_texture("Mud"));
+    TerrainTexturePack *texture_pack = new TerrainTexturePack(background_texture, red_texture, green_texture, blue_texture);
 
     ModelData dragon_model_data = obj_loader.load_obj_model("Dragon");
     RawModel *dragon_model = loader.load_raw_model(dragon_model_data.get_vertices(), dragon_model_data.get_indices(), dragon_model_data.get_normals(), dragon_model_data.get_texture_coordinates());
@@ -64,8 +73,8 @@ int main(int argc, char *argv[]) {
     Light sun(Vector3f(0.0f, 0.0f, -20.0f), Vector3f(1.0f, 1.0f, 1.0f));
 
     std::vector<Terrain *> terrains;
-    Terrain *terrain = new Terrain(0, -1, loader, new ModelTexture(loader.load_texture("Lava")));
-    Terrain *terrain2 = new Terrain(-1, -1, loader, new ModelTexture(loader.load_texture("Lava")));
+    Terrain *terrain = new Terrain(0, -1, loader, texture_pack, blend_map);
+    Terrain *terrain2 = new Terrain(-1, -1, loader, texture_pack, blend_map);
     terrains.push_back(terrain);
     terrains.push_back(terrain2);
 
@@ -95,12 +104,10 @@ int main(int argc, char *argv[]) {
     for (size_t i = 0; i < entities.size(); i++) {
         delete entities.at(i);
     }
-    for (size_t i = 0; i < terrains.size(); i++) {
-        delete terrains.at(i);
-    }
     
     delete fern;
     delete dragon;
+    delete terrain;
     delete master_renderer;
     
     glfwTerminate();

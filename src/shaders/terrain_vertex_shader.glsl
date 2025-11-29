@@ -24,7 +24,7 @@ void main(void) {
 
     gl_Position = projection_matrix * position_relative_to_camera;
 
-    out_texture_coordinates = in_texture_coordinates * 40.0;
+    out_texture_coordinates = in_texture_coordinates;
     out_surface_normal = (transformation_matrix * vec4(in_normal, 0.0)).xyz;
     out_to_light_vector = light_position - world_position.xyz;
     out_to_camera_vector = (inverse(view_matrix) * vec4(0.0, 0.0, 0.0, 1.0)).xyz - world_position.xyz;

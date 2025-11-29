@@ -36,6 +36,7 @@ void OutliningRenderer::prepare_textured_model(TexturedModel *textured_model) {
     glEnableVertexAttribArray(1); // 1 -> normal
 
     textured_model->get_model_texture()->get_texture()->bind_to_unit(0);
+    textured_model->get_model_texture()->get_texture()->bind();
 }
 
 void OutliningRenderer::unbind_textured_model(TexturedModel *textured_model) {

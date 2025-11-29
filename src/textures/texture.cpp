@@ -40,7 +40,6 @@ void Texture::load_data(std::string filepath) {
 
 void Texture::bind_to_unit(unsigned int unit) {
     glActiveTexture(GL_TEXTURE0 + unit);
-    bind();
 }
 
 unsigned int Texture::get_id() {

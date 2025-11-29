@@ -11,6 +11,7 @@
 #include "./uniforms/uniform_matrix4f.hpp"
 #include "./uniforms/uniform_vector3f.hpp"
 #include "./uniforms/uniform_float.hpp"
+#include "./uniforms/uniform_sampler.hpp"
 #include "./entities/camera.hpp"
 #include "./entities/light.hpp"
 
@@ -28,6 +29,7 @@ class TerrainShader : public ShaderProgram {
         void load_light(Light light);
         void load_specular_lighting(float shine_damper_value, float reflectivity_value);
         void load_sky_colour(Vector3f colour);
+        void connect_texture_units();
 
     protected:
         UniformMatrix4f *transformation_matrix;
@@ -38,4 +40,9 @@ class TerrainShader : public ShaderProgram {
         UniformFloat *shine_damper;
         UniformFloat *reflectivity;
         UniformVector3f *sky_colour;
+        UniformSampler *background_texture;
+        UniformSampler *red_texture;
+        UniformSampler *blue_texture;
+        UniformSampler *green_texture;
+        UniformSampler *blend_map;
 };
